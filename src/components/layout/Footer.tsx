@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Heart, Phone, Mail, MapPin, Instagram, Facebook, Linkedin } from "lucide-react";
+import { Heart, Mail, Instagram, Facebook, Linkedin } from "lucide-react";
 const navigation = {
   servicos: [{
     name: "Terapia Individual",
@@ -67,20 +67,16 @@ export function Footer() {
 
             <div className="space-y-3">
               <a href="tel:+5511999999999" className="flex items-center gap-3 text-background/80 hover:text-accent transition-colors">
-                <Phone className="h-5 w-5" />
-                <span>(11) 99999-9999</span>
+                
+                
               </a>
               <a href="mailto:contato@crescer.me" className="flex items-center gap-3 text-background/80 hover:text-accent transition-colors">
                 <Mail className="h-5 w-5" />
                 <span>contato@crescer.me</span>
               </a>
               <div className="flex items-start gap-3 text-background/80">
-                <MapPin className="h-5 w-5 mt-0.5" />
-                <span>
-                  Av. Paulista, 1000 - Sala 501
-                  <br />
-                  Bela Vista, São Paulo - SP
-                </span>
+                
+                
               </div>
             </div>
 

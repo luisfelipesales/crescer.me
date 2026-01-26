@@ -16,7 +16,7 @@ export function HeroSection() {
           <div className="flex flex-col justify-center space-y-8">
             <div className="inline-flex items-center gap-2 self-start rounded-full bg-accent/10 px-4 py-2 text-sm font-medium text-accent">
               <Sparkles className="h-4 w-4" />
-              <span>Consulta inicial gratuita</span>
+              <span>Triagem inicial gratuita</span>
             </div>
 
             <div className="space-y-4">

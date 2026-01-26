@@ -8,7 +8,6 @@ import {
   Building2,
   Receipt,
   Shield,
-  Phone,
   MessageCircle,
 } from "lucide-react";
 
@@ -292,16 +291,6 @@ export default function Pagamentos() {
               <Button variant="secondary" size="lg">
                 <MessageCircle className="mr-2 h-5 w-5" />
                 WhatsApp
-              </Button>
-            </a>
-            <a href="tel:+551134567890">
-              <Button
-                variant="outline"
-                size="lg"
-                className="border-white/30 text-primary-foreground hover:bg-white/10"
-              >
-                <Phone className="mr-2 h-5 w-5" />
-                Ligar agora
               </Button>
             </a>
           </div>

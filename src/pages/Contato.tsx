@@ -3,43 +3,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import {
-  Phone,
-  Mail,
-  MapPin,
-  Clock,
-  MessageCircle,
-  Calendar,
-} from "lucide-react";
+import { Clock, MessageCircle, Calendar } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
-
-const contactInfo = [
-  {
-    icon: Phone,
-    title: "Telefone",
-    content: "(11) 3456-7890",
-    description: "Seg a Sex, 8h às 20h",
-  },
-  {
-    icon: MessageCircle,
-    title: "WhatsApp",
-    content: "(11) 99999-8888",
-    description: "Resposta em até 2h",
-  },
-  {
-    icon: Mail,
-    title: "E-mail",
-    content: "contato@clinicasaude.com.br",
-    description: "Resposta em até 24h",
-  },
-  {
-    icon: MapPin,
-    title: "Endereço",
-    content: "Av. Paulista, 1000 - Cj. 501",
-    description: "Bela Vista, São Paulo - SP",
-  },
-];
 
 const faqs = [
   {
@@ -103,29 +69,6 @@ export default function Contato() {
               Entre em contato conosco para agendar uma consulta gratuita ou tirar
               suas dúvidas. Nossa equipe está pronta para atendê-lo.
             </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Contact Info Cards */}
-      <section className="border-b border-border py-12">
-        <div className="container-custom">
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-            {contactInfo.map((info, index) => (
-              <div
-                key={index}
-                className="rounded-xl border border-border bg-card p-6 text-center transition-shadow hover:shadow-md"
-              >
-                <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
-                  <info.icon className="h-6 w-6 text-primary" />
-                </div>
-                <h3 className="font-semibold text-foreground">{info.title}</h3>
-                <p className="mt-1 font-medium text-primary">{info.content}</p>
-                <p className="mt-1 text-sm text-muted-foreground">
-                  {info.description}
-                </p>
-              </div>
-            ))}
           </div>
         </div>
       </section>
@@ -252,46 +195,6 @@ export default function Contato() {
                       WhatsApp
                     </a>
                   </Button>
-                  <Button
-                    variant="outline"
-                    className="border-white/30 text-white hover:bg-white/10"
-                    asChild
-                  >
-                    <a href="tel:+551134567890">
-                      <Phone className="mr-2 h-4 w-4" />
-                      Ligar Agora
-                    </a>
-                  </Button>
-                </div>
-              </div>
-
-              {/* Hours */}
-              <div className="rounded-xl border border-border bg-card p-6">
-                <div className="mb-4 flex items-center gap-3">
-                  <Clock className="h-5 w-5 text-primary" />
-                  <h3 className="font-semibold text-foreground">
-                    Horário de Funcionamento
-                  </h3>
-                </div>
-                <div className="space-y-2 text-sm">
-                  <div className="flex justify-between">
-                    <span className="text-muted-foreground">Segunda a Sexta</span>
-                    <span className="font-medium text-foreground">
-                      08:00 - 20:00
-                    </span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-muted-foreground">Sábado</span>
-                    <span className="font-medium text-foreground">
-                      08:00 - 14:00
-                    </span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-muted-foreground">
-                      Domingo e Feriados
-                    </span>
-                    <span className="font-medium text-foreground">Fechado</span>
-                  </div>
                 </div>
               </div>
 

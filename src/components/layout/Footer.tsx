@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Heart, Mail, Instagram, Facebook, Linkedin } from "lucide-react";
+import { Heart, Mail, Instagram } from "lucide-react";
 const navigation = {
   servicos: [{
     name: "Terapia Individual",
@@ -81,14 +81,8 @@ export function Footer() {
             </div>
 
             <div className="flex gap-4">
-              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="flex h-10 w-10 items-center justify-center rounded-full bg-background/10 hover:bg-accent hover:text-accent-foreground transition-colors">
+              <a href="https://instagram.com/crescer.me" target="_blank" rel="noopener noreferrer" className="flex h-10 w-10 items-center justify-center rounded-full bg-background/10 hover:bg-accent hover:text-accent-foreground transition-colors">
                 <Instagram className="h-5 w-5" />
-              </a>
-              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="flex h-10 w-10 items-center justify-center rounded-full bg-background/10 hover:bg-accent hover:text-accent-foreground transition-colors">
-                <Facebook className="h-5 w-5" />
-              </a>
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="flex h-10 w-10 items-center justify-center rounded-full bg-background/10 hover:bg-accent hover:text-accent-foreground transition-colors">
-                <Linkedin className="h-5 w-5" />
               </a>
             </div>
           </div>

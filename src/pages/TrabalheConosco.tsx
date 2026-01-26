@@ -13,7 +13,7 @@ const benefits = [{
 }, {
   icon: TrendingUp,
   title: "Crescimento",
-  description: "Oportunidades de desenvolvimento profissional e supervisão clínica"
+  description: "Oportunidades de desenvolvimento profissional contínuo"
 }, {
   icon: Users,
   title: "Equipe",
@@ -24,28 +24,19 @@ const benefits = [{
   description: "Acesso a treinamentos, cursos e congressos na área"
 }, {
   icon: Clock,
-  title: "Flexibilidade",
-  description: "Horários flexíveis e possibilidade de trabalho híbrido"
-}, {
-  icon: MapPin,
-  title: "Localização",
-  description: "Clínica moderna em localização privilegiada"
+  title: "100% Online",
+  description: "Trabalhe de qualquer lugar com total flexibilidade de horários"
 }];
 const openPositions = [{
   title: "Psicólogo(a) Infantil",
-  type: "CLT ou PJ",
-  location: "São Paulo - SP",
+  type: "PJ",
+  location: "Remoto (100% Online)",
   requirements: ["CRP ativo", "Experiência com crianças", "Formação em TCC (desejável)"]
 }, {
   title: "Neuropsicólogo(a)",
   type: "PJ",
-  location: "São Paulo - SP",
+  location: "Remoto (100% Online)",
   requirements: ["CRP ativo", "Especialização em Neuropsicologia", "Experiência com avaliações infantis"]
-}, {
-  title: "Psiquiatra Infantil",
-  type: "PJ",
-  location: "São Paulo - SP",
-  requirements: ["CRM ativo", "RQE em Psiquiatria Infantil", "Disponibilidade mínima de 8h/semana"]
 }];
 export default function TrabalheConosco() {
   const [formData, setFormData] = useState({

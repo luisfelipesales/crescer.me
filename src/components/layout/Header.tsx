@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetTrigger, SheetTitle, SheetDescription } from "@/components/ui/sheet";
+import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 import { Menu, Heart, Phone, User, LogOut } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useAuth } from "@/hooks/useAuth";
@@ -90,7 +91,10 @@ export function Header() {
               <span className="sr-only">Abrir menu</span>
             </Button>
           </SheetTrigger>
-          <SheetContent side="right" className="w-[300px] sm:w-[350px]">
+          <SheetContent side="right" className="w-[300px] sm:w-[350px]" aria-describedby={undefined}>
+            <VisuallyHidden>
+              <SheetTitle>Menu de navegação</SheetTitle>
+            </VisuallyHidden>
             <div className="flex flex-col gap-6 pt-6">
               <Link to="/" className="flex items-center gap-2" onClick={() => setIsOpen(false)}>
                 <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary">

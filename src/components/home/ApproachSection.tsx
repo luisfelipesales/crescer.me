@@ -77,12 +77,14 @@ export function ApproachSection() {
               </div>
             </div>
 
-            <Link to="/abordagem">
-              <Button size="lg" className="group">
-                Saiba mais sobre nossa abordagem
-                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </Button>
-            </Link>
+            <div className="pt-2">
+              <Link to="/abordagem">
+                <Button size="lg" className="group">
+                  Saiba mais sobre nossa abordagem
+                  <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </Button>
+              </Link>
+            </div>
           </div>
 
           {/* Cards Grid */}

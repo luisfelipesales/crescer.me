@@ -1,0 +1,265 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================
+   CRESCER - DESIGN SYSTEM
+   Plataforma de saúde mental infantojuvenil
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800&family=Quicksand:wght@400;500;600;700&display=swap');
+
+@layer base {
+  :root {
+    /* Core brand colors - Warm, welcoming, professional */
+    --background: 40 33% 98%;
+    --foreground: 220 30% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 220 30% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 30% 15%;
+
+    /* Primary - Deep teal (trust, calm, professionalism) */
+    --primary: 174 58% 32%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Secondary - Soft sage green (growth, healing) */
+    --secondary: 150 25% 92%;
+    --secondary-foreground: 174 58% 25%;
+
+    /* Muted - Warm gray */
+    --muted: 40 20% 94%;
+    --muted-foreground: 220 15% 45%;
+
+    /* Accent - Warm coral (energy, approachability) */
+    --accent: 15 85% 60%;
+    --accent-foreground: 0 0% 100%;
+
+    /* Destructive */
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+
+    /* Borders and inputs */
+    --border: 40 20% 88%;
+    --input: 40 20% 88%;
+    --ring: 174 58% 32%;
+
+    --radius: 0.75rem;
+
+    /* Extended palette */
+    --lavender: 270 50% 92%;
+    --lavender-foreground: 270 40% 35%;
+    
+    --mint: 160 40% 90%;
+    --mint-foreground: 160 40% 25%;
+    
+    --peach: 25 100% 94%;
+    --peach-foreground: 25 60% 35%;
+    
+    --sky: 200 80% 92%;
+    --sky-foreground: 200 60% 30%;
+
+    /* Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(174 58% 32%) 0%, hsl(180 50% 45%) 50%, hsl(160 40% 50%) 100%);
+    --gradient-warm: linear-gradient(135deg, hsl(25 100% 94%) 0%, hsl(15 85% 60% / 0.2) 100%);
+    --gradient-calm: linear-gradient(180deg, hsl(40 33% 98%) 0%, hsl(200 80% 92% / 0.3) 100%);
+
+    /* Shadows */
+    --shadow-sm: 0 1px 2px 0 hsl(220 30% 15% / 0.05);
+    --shadow-md: 0 4px 6px -1px hsl(220 30% 15% / 0.07), 0 2px 4px -2px hsl(220 30% 15% / 0.05);
+    --shadow-lg: 0 10px 15px -3px hsl(220 30% 15% / 0.08), 0 4px 6px -4px hsl(220 30% 15% / 0.05);
+    --shadow-xl: 0 20px 25px -5px hsl(220 30% 15% / 0.1), 0 8px 10px -6px hsl(220 30% 15% / 0.05);
+    --shadow-accent: 0 4px 14px 0 hsl(15 85% 60% / 0.25);
+    --shadow-primary: 0 4px 14px 0 hsl(174 58% 32% / 0.25);
+
+    /* Sidebar */
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 220 30% 15%;
+    --sidebar-primary: 174 58% 32%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 150 25% 92%;
+    --sidebar-accent-foreground: 174 58% 25%;
+    --sidebar-border: 40 20% 88%;
+    --sidebar-ring: 174 58% 32%;
+  }
+
+  .dark {
+    --background: 220 25% 10%;
+    --foreground: 40 20% 95%;
+
+    --card: 220 25% 13%;
+    --card-foreground: 40 20% 95%;
+
+    --popover: 220 25% 13%;
+    --popover-foreground: 40 20% 95%;
+
+    --primary: 174 50% 45%;
+    --primary-foreground: 220 25% 10%;
+
+    --secondary: 174 30% 18%;
+    --secondary-foreground: 174 50% 70%;
+
+    --muted: 220 20% 18%;
+    --muted-foreground: 220 15% 60%;
+
+    --accent: 15 70% 55%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 62% 45%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 20% 20%;
+    --input: 220 20% 20%;
+    --ring: 174 50% 45%;
+
+    --lavender: 270 30% 20%;
+    --lavender-foreground: 270 40% 75%;
+    
+    --mint: 160 30% 18%;
+    --mint-foreground: 160 40% 70%;
+    
+    --peach: 25 40% 18%;
+    --peach-foreground: 25 60% 75%;
+    
+    --sky: 200 40% 18%;
+    --sky-foreground: 200 60% 75%;
+
+    --sidebar-background: 220 25% 12%;
+    --sidebar-foreground: 40 20% 95%;
+    --sidebar-primary: 174 50% 45%;
+    --sidebar-primary-foreground: 220 25% 10%;
+    --sidebar-accent: 174 30% 18%;
+    --sidebar-accent-foreground: 174 50% 70%;
+    --sidebar-border: 220 20% 20%;
+    --sidebar-ring: 174 50% 45%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Nunito', system-ui, sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Quicksand', system-ui, sans-serif;
+    @apply font-bold tracking-tight;
+  }
+}
+
+@layer components {
+  .container-custom {
+    @apply mx-auto max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+
+  .section-padding {
+    @apply py-16 md:py-24;
+  }
+
+  .text-gradient-primary {
+    background: var(--gradient-hero);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .card-hover {
+    @apply transition-all duration-300 hover:-translate-y-1;
+    box-shadow: var(--shadow-md);
+  }
+
+  .card-hover:hover {
+    box-shadow: var(--shadow-xl);
+  }
+
+  .btn-shadow {
+    box-shadow: var(--shadow-md);
+  }
+
+  .btn-shadow:hover {
+    box-shadow: var(--shadow-lg);
+  }
+
+  .accent-shadow {
+    box-shadow: var(--shadow-accent);
+  }
+
+  .primary-shadow {
+    box-shadow: var(--shadow-primary);
+  }
+}
+
+@layer utilities {
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .animate-float-delayed {
+    animation: float 6s ease-in-out infinite;
+    animation-delay: 2s;
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.6s ease-out forwards;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-slide-in-left {
+    animation: slideInLeft 0.6s ease-out forwards;
+  }
+
+  @keyframes slideInLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  .animate-slide-in-right {
+    animation: slideInRight 0.6s ease-out forwards;
+  }
+
+  @keyframes slideInRight {
+    from {
+      opacity: 0;
+      transform: translateX(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+}

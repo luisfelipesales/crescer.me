@@ -18,6 +18,10 @@ import Perfil from "./pages/Perfil";
 import VideoCall from "./pages/VideoCall";
 import Prontuario from "./pages/Prontuario";
 import Chat from "./pages/Chat";
+import FAQ from "./pages/FAQ";
+import Emergencia from "./pages/Emergencia";
+import Blog from "./pages/Blog";
+import Pagamentos from "./pages/Pagamentos";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -45,6 +49,10 @@ const App = () => (
             <Route path="/video/:appointmentId" element={<VideoCall />} />
             <Route path="/prontuario/:patientId" element={<Prontuario />} />
             <Route path="/chat" element={<Chat />} />
+            <Route path="/faq" element={<FAQ />} />
+            <Route path="/emergencia" element={<Emergencia />} />
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/pagamentos" element={<Pagamentos />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

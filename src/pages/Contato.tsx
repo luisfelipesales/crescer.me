@@ -16,17 +16,17 @@ const faqs = [
   {
     question: "Vocês atendem por convênio?",
     answer:
-      "Sim, aceitamos os principais convênios como Bradesco Saúde, SulAmérica, Amil, Unimed e Porto Seguro. Também oferecemos opção particular e reembolso.",
+      "No momento trabalhamos apenas com atendimento particular. Fornecemos recibo para solicitar reembolso junto ao seu plano de saúde.",
   },
   {
     question: "Como funciona o agendamento?",
     answer:
-      "Você pode agendar pelo WhatsApp, telefone ou pelo formulário nesta página. Nossa equipe entrará em contato para confirmar o melhor horário.",
+      "Você pode agendar pelo WhatsApp, pelo formulário nesta página ou pelo Portal do Paciente. Nossa equipe entrará em contato para confirmar o melhor horário.",
   },
   {
     question: "Qual a duração das sessões?",
     answer:
-      "As sessões de terapia têm duração de 50 minutos. Consultas psiquiátricas podem variar entre 30 e 60 minutos dependendo do caso.",
+      "As sessões de terapia têm duração de 50 minutos. O atendimento é 100% online via teleconsulta.",
   },
 ];
 

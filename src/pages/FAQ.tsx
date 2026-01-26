@@ -6,7 +6,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
-import { MessageCircle, Phone, Mail } from "lucide-react";
+import { MessageCircle, Mail } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const faqCategories = [
@@ -31,7 +31,7 @@ const faqCategories = [
       {
         question: "Vocês atendem online?",
         answer:
-          "Sim! Oferecemos atendimento online (teleconsulta) para pacientes que preferem essa modalidade ou que moram em outras cidades. A qualidade do atendimento é a mesma do presencial.",
+          "Sim! Nosso atendimento é 100% online (teleconsulta), permitindo que você receba acompanhamento de qualidade de qualquer lugar.",
       },
       {
         question: "Com que frequência as sessões acontecem?",
@@ -46,7 +46,7 @@ const faqCategories = [
       {
         question: "Como faço para agendar uma consulta?",
         answer:
-          "Você pode agendar pelo nosso site, WhatsApp (11) 99999-8888, ou telefone (11) 3456-7890. Também é possível agendar diretamente pelo Portal do Paciente após criar sua conta.",
+          "Você pode agendar pelo nosso site, WhatsApp ou e-mail. Também é possível agendar diretamente pelo Portal do Paciente após criar sua conta.",
       },
       {
         question: "Qual a política de cancelamento?",
@@ -56,17 +56,17 @@ const faqCategories = [
       {
         question: "Posso reagendar minha consulta?",
         answer:
-          "Sim! Você pode reagendar pelo Portal do Paciente ou entrando em contato conosco. Lembre-se de avisar com antecedência.",
+          "Sim! Você pode reagendar pelo Portal do Paciente ou entrando em contato conosco via WhatsApp ou e-mail. Lembre-se de avisar com antecedência.",
       },
     ],
   },
   {
-    title: "Pagamento e Convênios",
+    title: "Pagamento",
     faqs: [
       {
-        question: "Quais convênios vocês aceitam?",
+        question: "Vocês aceitam convênios?",
         answer:
-          "Aceitamos os principais convênios como Bradesco Saúde, SulAmérica, Amil, Unimed, Porto Seguro e NotreDame Intermédica. Consulte-nos para verificar a cobertura do seu plano.",
+          "No momento não trabalhamos diretamente com convênios. Oferecemos atendimento particular e possibilidade de reembolso junto ao seu plano de saúde.",
       },
       {
         question: "Como funciona o pagamento particular?",
@@ -79,9 +79,9 @@ const faqCategories = [
           "Sim, emitimos recibo ou nota fiscal para todas as consultas, o que permite dedução no Imposto de Renda como despesa médica.",
       },
       {
-        question: "Vocês trabalham com reembolso?",
+        question: "Como funciona o reembolso?",
         answer:
-          "Sim! Para convênios que não atendemos diretamente, fornecemos toda a documentação necessária para você solicitar o reembolso junto ao seu plano de saúde.",
+          "Fornecemos toda a documentação necessária para você solicitar o reembolso junto ao seu plano de saúde. O valor reembolsado depende da cobertura do seu convênio.",
       },
     ],
   },
@@ -107,26 +107,6 @@ const faqCategories = [
         question: "Qual a abordagem terapêutica utilizada?",
         answer:
           "Utilizamos principalmente a Terapia Cognitivo-Comportamental (TCC), que é uma abordagem baseada em evidências científicas e muito eficaz para crianças e adolescentes.",
-      },
-    ],
-  },
-  {
-    title: "Sobre a Clínica",
-    faqs: [
-      {
-        question: "Onde fica a clínica?",
-        answer:
-          "Nossa clínica fica em São Paulo, em uma localização de fácil acesso por transporte público e com estacionamento nas proximidades.",
-      },
-      {
-        question: "A clínica é acessível?",
-        answer:
-          "Sim! Nossa clínica possui acessibilidade para pessoas com mobilidade reduzida, incluindo rampa de acesso e banheiro adaptado.",
-      },
-      {
-        question: "Vocês atendem em horários alternativos?",
-        answer:
-          "Sim, temos horários de atendimento estendidos durante a semana e também atendemos aos sábados pela manhã.",
       },
     ],
   },
@@ -203,12 +183,6 @@ export default function FAQ() {
                 <Button size="lg" className="w-full sm:w-auto">
                   <MessageCircle className="mr-2 h-5 w-5" />
                   WhatsApp
-                </Button>
-              </a>
-              <a href="tel:+551134567890">
-                <Button variant="outline" size="lg" className="w-full sm:w-auto">
-                  <Phone className="mr-2 h-5 w-5" />
-                  Ligar agora
                 </Button>
               </a>
               <Link to="/contato">

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Heart, Mail, Instagram } from "lucide-react";
+import { Heart, Mail, Instagram, MessageCircle } from "lucide-react";
 const navigation = {
   servicos: [{
     name: "Terapia Individual",
@@ -66,18 +66,14 @@ export function Footer() {
             </p>
 
             <div className="space-y-3">
-              <a href="tel:+5511999999999" className="flex items-center gap-3 text-background/80 hover:text-accent transition-colors">
-                
-                
+              <a href="https://wa.me/5511999998888" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-background/80 hover:text-accent transition-colors">
+                <MessageCircle className="h-5 w-5" />
+                <span>(11) 99999-8888</span>
               </a>
               <a href="mailto:contato@crescer.me" className="flex items-center gap-3 text-background/80 hover:text-accent transition-colors">
                 <Mail className="h-5 w-5" />
                 <span>contato@crescer.me</span>
               </a>
-              <div className="flex items-start gap-3 text-background/80">
-                
-                
-              </div>
             </div>
 
             <div className="flex gap-4">

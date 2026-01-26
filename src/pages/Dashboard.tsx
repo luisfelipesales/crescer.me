@@ -221,9 +221,9 @@ export default function Dashboard() {
               <a href="https://wa.me/5511999998888" className="text-primary hover:underline">
                 (11) 99999-8888
               </a>{" "}
-              ou ligue para{" "}
-              <a href="tel:+551134567890" className="text-primary hover:underline">
-                (11) 3456-7890
+              ou pelo e-mail{" "}
+              <a href="mailto:contato@crescer.me" className="text-primary hover:underline">
+                contato@crescer.me
               </a>
             </p>
           </div>

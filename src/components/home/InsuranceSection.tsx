@@ -1,5 +1,5 @@
 const insurances = [
-  { name: "Bradesco Saúde", logo: "🏥" },
+  { name: "Em breve", logo: "🏥" },
   { name: "SulAmérica", logo: "🏥" },
   { name: "Amil", logo: "🏥" },
   { name: "Unimed", logo: "🏥" },

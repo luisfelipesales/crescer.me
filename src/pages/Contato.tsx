@@ -1,4 +1,3 @@
-import * as React from "react";
 import { Layout } from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -65,7 +64,7 @@ const faqs = [
   },
 ];
 
-const Contato = React.forwardRef<HTMLDivElement>((_, ref) => {
+export default function Contato() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -88,7 +87,7 @@ const Contato = React.forwardRef<HTMLDivElement>((_, ref) => {
   };
 
   return (
-    <Layout ref={ref}>
+    <Layout>
       {/* Hero Section */}
       <section className="bg-gradient-to-b from-primary/5 to-background py-16 md:py-24">
         <div className="container-custom">
@@ -323,8 +322,4 @@ const Contato = React.forwardRef<HTMLDivElement>((_, ref) => {
       </section>
     </Layout>
   );
-});
-
-Contato.displayName = "Contato";
-
-export default Contato;
+}

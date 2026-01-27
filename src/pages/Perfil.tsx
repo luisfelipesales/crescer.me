@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import { useProfile } from "@/hooks/useProfile";
 import { Layout } from "@/components/layout/Layout";
@@ -23,6 +23,7 @@ import {
   Users,
   Plus,
   Trash2,
+  ArrowLeft,
 } from "lucide-react";
 import type { Tables } from "@/integrations/supabase/types";
 
@@ -242,6 +243,12 @@ export default function Perfil() {
         <div className="container-custom max-w-3xl">
           {/* Header */}
           <div className="mb-8">
+            <Link to="/dashboard">
+              <Button variant="ghost" className="mb-4">
+                <ArrowLeft className="mr-2 h-4 w-4" />
+                Voltar ao painel
+              </Button>
+            </Link>
             <h1 className="font-display text-3xl font-bold text-foreground">
               Meu Perfil
             </h1>

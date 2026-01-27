@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
-import { Phone, Heart, MessageCircle, AlertTriangle, Clock, MapPin } from "lucide-react";
+import { Phone, Heart, Mail, AlertTriangle, Clock, MapPin } from "lucide-react";
 
 const emergencyContacts = [
   {
@@ -238,10 +238,10 @@ export default function Emergencia() {
               passo para o seu bem-estar.
             </p>
             <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:justify-center">
-              <a href="https://wa.me/5511999998888" target="_blank" rel="noopener noreferrer">
+              <a href="mailto:contato@crescer.me">
                 <Button size="lg" className="w-full sm:w-auto">
-                  <MessageCircle className="mr-2 h-5 w-5" />
-                  WhatsApp
+                  <Mail className="mr-2 h-5 w-5" />
+                  E-mail
                 </Button>
               </a>
               <a href="/agendar">

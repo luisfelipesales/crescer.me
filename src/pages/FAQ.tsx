@@ -46,7 +46,7 @@ const faqCategories = [
       {
         question: "Como faço para agendar uma consulta?",
         answer:
-          "Você pode agendar pelo nosso site, WhatsApp ou e-mail. Também é possível agendar diretamente pelo Portal do Paciente após criar sua conta.",
+          "Você pode agendar pelo nosso site ou e-mail. Também é possível agendar diretamente pelo Portal do Paciente após criar sua conta.",
       },
       {
         question: "Qual a política de cancelamento?",
@@ -56,7 +56,7 @@ const faqCategories = [
       {
         question: "Posso reagendar minha consulta?",
         answer:
-          "Sim! Você pode reagendar pelo Portal do Paciente ou entrando em contato conosco via WhatsApp ou e-mail. Lembre-se de avisar com antecedência.",
+          "Sim! Você pode reagendar pelo Portal do Paciente ou entrando em contato conosco via e-mail. Lembre-se de avisar com antecedência.",
       },
     ],
   },
@@ -175,19 +175,15 @@ export default function FAQ() {
             </p>
 
             <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:justify-center">
-              <a
-                href="https://wa.me/5511999998888"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <a href="mailto:contato@crescer.me">
                 <Button size="lg" className="w-full sm:w-auto">
-                  <MessageCircle className="mr-2 h-5 w-5" />
-                  WhatsApp
+                  <Mail className="mr-2 h-5 w-5" />
+                  E-mail
                 </Button>
               </a>
               <Link to="/contato">
                 <Button variant="outline" size="lg" className="w-full sm:w-auto">
-                  <Mail className="mr-2 h-5 w-5" />
+                  <MessageCircle className="mr-2 h-5 w-5" />
                   Formulário
                 </Button>
               </Link>

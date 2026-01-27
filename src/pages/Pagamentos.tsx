@@ -8,7 +8,7 @@ import {
   Building2,
   Receipt,
   Shield,
-  MessageCircle,
+  Mail,
 } from "lucide-react";
 
 const insurances = [
@@ -287,10 +287,10 @@ export default function Pagamentos() {
             valores, convênios ou formas de pagamento.
           </p>
           <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:justify-center">
-            <a href="https://wa.me/5511999998888" target="_blank" rel="noopener noreferrer">
+            <a href="mailto:contato@crescer.me">
               <Button variant="secondary" size="lg">
-                <MessageCircle className="mr-2 h-5 w-5" />
-                WhatsApp
+                <Mail className="mr-2 h-5 w-5" />
+                E-mail
               </Button>
             </a>
           </div>

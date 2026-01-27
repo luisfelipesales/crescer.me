@@ -21,6 +21,7 @@ import {
   AlertCircle,
   Video,
   MapPin,
+  ArrowLeft,
 } from "lucide-react";
 import type { Tables } from "@/integrations/supabase/types";
 
@@ -211,21 +212,29 @@ export default function Consultas() {
       <div className="min-h-[calc(100vh-200px)] bg-muted/30 py-8 md:py-12">
         <div className="container-custom max-w-4xl">
           {/* Header */}
-          <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-            <div>
-              <h1 className="font-display text-3xl font-bold text-foreground">
-                Minhas Consultas
-              </h1>
-              <p className="mt-1 text-muted-foreground">
-                Gerencie suas consultas agendadas
-              </p>
-            </div>
-            <Link to="/agendar">
-              <Button>
-                <Plus className="mr-2 h-4 w-4" />
-                Agendar Nova
+          <div className="mb-8">
+            <Link to="/dashboard">
+              <Button variant="ghost" className="mb-4">
+                <ArrowLeft className="mr-2 h-4 w-4" />
+                Voltar ao painel
               </Button>
             </Link>
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+              <div>
+                <h1 className="font-display text-3xl font-bold text-foreground">
+                  Minhas Consultas
+                </h1>
+                <p className="mt-1 text-muted-foreground">
+                  Gerencie suas consultas agendadas
+                </p>
+              </div>
+              <Link to="/agendar">
+                <Button>
+                  <Plus className="mr-2 h-4 w-4" />
+                  Agendar Nova
+                </Button>
+              </Link>
+            </div>
           </div>
 
           {loading ? (

@@ -21,7 +21,7 @@ const faqs = [
   {
     question: "Como funciona o agendamento?",
     answer:
-      "Você pode agendar pelo WhatsApp, pelo formulário nesta página ou pelo Portal do Paciente. Nossa equipe entrará em contato para confirmar o melhor horário.",
+      "Você pode agendar pelo formulário nesta página ou pelo Portal do Paciente. Nossa equipe entrará em contato para confirmar o melhor horário.",
   },
   {
     question: "Qual a duração das sessões?",
@@ -174,7 +174,7 @@ export default function Contato() {
               <div className="rounded-2xl bg-primary p-8 text-primary-foreground">
                 <Calendar className="mb-4 h-10 w-10" />
                 <h3 className="font-display text-2xl font-bold">
-                  Agende sua consulta gratuita
+                  Agende sua triagem gratuita
                 </h3>
                 <p className="mt-2 text-primary-foreground/80">
                   Primeira consulta de 30 minutos sem custo para conhecer nossa
@@ -186,13 +186,9 @@ export default function Contato() {
                     className="bg-white text-primary hover:bg-white/90"
                     asChild
                   >
-                    <a
-                      href="https://wa.me/5511999998888"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
+                    <a href="mailto:contato@crescer.me">
                       <MessageCircle className="mr-2 h-4 w-4" />
-                      WhatsApp
+                      E-mail
                     </a>
                   </Button>
                 </div>

@@ -217,11 +217,7 @@ export default function Dashboard() {
               Precisa de ajuda?
             </h3>
             <p className="mt-2 text-sm text-muted-foreground">
-              Entre em contato conosco pelo WhatsApp{" "}
-              <a href="https://wa.me/5511999998888" className="text-primary hover:underline">
-                (11) 99999-8888
-              </a>{" "}
-              ou pelo e-mail{" "}
+              Entre em contato conosco pelo e-mail{" "}
               <a href="mailto:contato@crescer.me" className="text-primary hover:underline">
                 contato@crescer.me
               </a>

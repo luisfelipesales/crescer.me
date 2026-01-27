@@ -45,7 +45,7 @@ const processSteps = [
     number: "01",
     title: "Avaliação Inicial",
     description:
-      "Consulta gratuita para entender as necessidades da família e determinar o melhor caminho de tratamento.",
+      "Triagem gratuita para entender as necessidades da família e determinar o melhor caminho de tratamento.",
   },
   {
     number: "02",

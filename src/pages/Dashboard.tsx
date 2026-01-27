@@ -99,7 +99,28 @@ export default function Dashboard() {
       icon: FileText,
       title: "Documentos",
       description: "Acesse relatórios e documentos",
-      href: "/documentos",
+      href: "/prontuario/" + (profile?.id || ""),
+    },
+  ];
+
+  const therapistQuickActions = [
+    {
+      icon: Calendar,
+      title: "Minha agenda",
+      description: "Gerencie suas consultas e disponibilidade",
+      href: "/terapeuta",
+    },
+    {
+      icon: User,
+      title: "Meus pacientes",
+      description: "Veja seus pacientes atribuídos",
+      href: "/terapeuta?tab=patients",
+    },
+    {
+      icon: FileText,
+      title: "Portal do Terapeuta",
+      description: "Acesse todas as ferramentas do terapeuta",
+      href: "/terapeuta",
     },
   ];
 
@@ -117,8 +138,16 @@ export default function Dashboard() {
                 Bem-vindo(a) ao seu portal de saúde mental
               </p>
             </div>
-            <div className="flex gap-2">
-              {(isAdmin || isTherapist) && (
+            <div className="flex flex-wrap gap-2">
+              {isTherapist && (
+                <Link to="/terapeuta">
+                  <Button variant="default" size="sm">
+                    <Calendar className="mr-2 h-4 w-4" />
+                    Portal do Terapeuta
+                  </Button>
+                </Link>
+              )}
+              {isAdmin && (
                 <Link to="/admin">
                   <Button variant="outline" size="sm">
                     <Shield className="mr-2 h-4 w-4" />
@@ -126,10 +155,6 @@ export default function Dashboard() {
                   </Button>
                 </Link>
               )}
-              <Button variant="outline" size="sm">
-                <Settings className="mr-2 h-4 w-4" />
-                Configurações
-              </Button>
               <Button variant="outline" size="sm" onClick={handleSignOut}>
                 <LogOut className="mr-2 h-4 w-4" />
                 Sair

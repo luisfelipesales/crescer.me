@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import { useProfile } from "@/hooks/useProfile";
 import { Layout } from "@/components/layout/Layout";
@@ -32,6 +32,7 @@ type Therapist = Tables<"profiles"> & {
 
 export default function Agendar() {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const { user, loading: authLoading } = useAuth();
   const { profile, loading: profileLoading } = useProfile();
   const [step, setStep] = useState(1);
@@ -61,6 +62,31 @@ export default function Agendar() {
       }
     }
   }, [user, profile]);
+
+  // Handle URL parameters for pre-selection
+  useEffect(() => {
+    const therapistId = searchParams.get("therapist");
+    const dateStr = searchParams.get("date");
+    const timeStr = searchParams.get("time");
+
+    if (therapistId && therapists.length > 0) {
+      const preSelectedTherapist = therapists.find((t) => t.id === therapistId);
+      if (preSelectedTherapist && !selectedTherapist) {
+        setSelectedTherapist(preSelectedTherapist);
+        setStep(2);
+
+        if (dateStr) {
+          const preSelectedDate = new Date(dateStr);
+          setSelectedDate(preSelectedDate);
+          setStep(3);
+
+          if (timeStr) {
+            setSelectedTime(timeStr);
+          }
+        }
+      }
+    }
+  }, [searchParams, therapists, selectedTherapist]);
 
   const fetchTherapists = async () => {
     setLoading(true);

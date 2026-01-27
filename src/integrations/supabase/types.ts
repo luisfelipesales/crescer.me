@@ -360,8 +360,12 @@ export type Database = {
           date_of_birth: string | null
           full_name: string
           id: string
+          max_age: number | null
+          min_age: number | null
           phone: string | null
           profile_type: Database["public"]["Enums"]["profile_type"]
+          session_price: number | null
+          therapeutic_approach: string | null
           updated_at: string
           user_id: string
         }
@@ -372,8 +376,12 @@ export type Database = {
           date_of_birth?: string | null
           full_name: string
           id?: string
+          max_age?: number | null
+          min_age?: number | null
           phone?: string | null
           profile_type?: Database["public"]["Enums"]["profile_type"]
+          session_price?: number | null
+          therapeutic_approach?: string | null
           updated_at?: string
           user_id: string
         }
@@ -384,12 +392,77 @@ export type Database = {
           date_of_birth?: string | null
           full_name?: string
           id?: string
+          max_age?: number | null
+          min_age?: number | null
           phone?: string | null
           profile_type?: Database["public"]["Enums"]["profile_type"]
+          session_price?: number | null
+          therapeutic_approach?: string | null
           updated_at?: string
           user_id?: string
         }
         Relationships: []
+      }
+      session_logs: {
+        Row: {
+          appointment_id: string
+          attended: boolean | null
+          created_at: string
+          homework: string | null
+          id: string
+          notes: string | null
+          patient_id: string
+          therapist_id: string
+          updated_at: string
+          weekly_goal: string | null
+        }
+        Insert: {
+          appointment_id: string
+          attended?: boolean | null
+          created_at?: string
+          homework?: string | null
+          id?: string
+          notes?: string | null
+          patient_id: string
+          therapist_id: string
+          updated_at?: string
+          weekly_goal?: string | null
+        }
+        Update: {
+          appointment_id?: string
+          attended?: boolean | null
+          created_at?: string
+          homework?: string | null
+          id?: string
+          notes?: string | null
+          patient_id?: string
+          therapist_id?: string
+          updated_at?: string
+          weekly_goal?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "session_logs_appointment_id_fkey"
+            columns: ["appointment_id"]
+            isOneToOne: true
+            referencedRelation: "appointments"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "session_logs_patient_id_fkey"
+            columns: ["patient_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "session_logs_therapist_id_fkey"
+            columns: ["therapist_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       specialties: {
         Row: {
@@ -443,6 +516,60 @@ export type Database = {
         Relationships: [
           {
             foreignKeyName: "therapist_availability_therapist_id_fkey"
+            columns: ["therapist_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      therapist_payouts: {
+        Row: {
+          amount: number
+          appointment_id: string | null
+          created_at: string
+          id: string
+          paid_at: string | null
+          period_end: string
+          period_start: string
+          receipt_url: string | null
+          status: string
+          therapist_id: string
+        }
+        Insert: {
+          amount: number
+          appointment_id?: string | null
+          created_at?: string
+          id?: string
+          paid_at?: string | null
+          period_end: string
+          period_start: string
+          receipt_url?: string | null
+          status?: string
+          therapist_id: string
+        }
+        Update: {
+          amount?: number
+          appointment_id?: string | null
+          created_at?: string
+          id?: string
+          paid_at?: string | null
+          period_end?: string
+          period_start?: string
+          receipt_url?: string | null
+          status?: string
+          therapist_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "therapist_payouts_appointment_id_fkey"
+            columns: ["appointment_id"]
+            isOneToOne: false
+            referencedRelation: "appointments"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "therapist_payouts_therapist_id_fkey"
             columns: ["therapist_id"]
             isOneToOne: false
             referencedRelation: "profiles"

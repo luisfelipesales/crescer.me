@@ -36,7 +36,7 @@ export function HeroSection() {
               <Link to="/agendar">
                 <Button size="lg" className="w-full sm:w-auto btn-shadow group">
                   <Phone className="mr-2 h-5 w-5" />
-                  Agendar consulta grátis
+                  Fazer triagem inicial gratuita
                   <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </Button>
               </Link>

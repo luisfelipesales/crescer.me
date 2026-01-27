@@ -16,6 +16,9 @@ const navigation = [{
   name: "Nossa equipe",
   href: "/equipe"
 }, {
+  name: "Blog",
+  href: "/blog"
+}, {
   name: "Trabalhe conosco",
   href: "/carreiras"
 }, {
@@ -74,10 +77,10 @@ export function Header() {
                   Entrar
                 </Button>
               </Link>
-              <Link to="/contato">
+              <Link to="/agendar">
                 <Button size="sm" className="btn-shadow">
                   <Phone className="mr-2 h-4 w-4" />
-                  Agendar consulta
+                  Fazer triagem gratuita
                 </Button>
               </Link>
             </>}
@@ -129,10 +132,10 @@ export function Header() {
                         Entrar
                       </Button>
                     </Link>
-                    <Link to="/contato" onClick={() => setIsOpen(false)}>
+                    <Link to="/agendar" onClick={() => setIsOpen(false)}>
                       <Button className="w-full">
                         <Phone className="mr-2 h-4 w-4" />
-                        Agendar consulta
+                        Fazer triagem gratuita
                       </Button>
                     </Link>
                   </>}

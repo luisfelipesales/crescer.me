@@ -127,8 +127,15 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Bottom Bar */}
+        {/* Disclaimer */}
         <div className="mt-12 pt-8 border-t border-background/10">
+          <p className="text-xs text-background/50 text-center mb-6">
+            *Indicadores internos de acompanhamento. Resultados variam conforme o caso e dependem de frequência, adesão e contexto familiar/escolar.
+          </p>
+        </div>
+
+        {/* Bottom Bar */}
+        <div className="pt-4 border-t border-background/10">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <p className="text-sm text-background/60">
               © {new Date().getFullYear()} Crescer. Todos os direitos reservados.

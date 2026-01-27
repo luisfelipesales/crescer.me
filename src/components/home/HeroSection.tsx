@@ -40,10 +40,12 @@ export function HeroSection() {
                   <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </Button>
               </Link>
-              <Button variant="outline" size="lg" className="w-full sm:w-auto group">
-                <Play className="mr-2 h-5 w-5" />
-                Como funciona
-              </Button>
+              <Link to="/abordagem">
+                <Button variant="outline" size="lg" className="w-full sm:w-auto group">
+                  <Play className="mr-2 h-5 w-5" />
+                  Como funciona
+                </Button>
+              </Link>
             </div>
 
             {/* Trust indicators */}

@@ -25,11 +25,11 @@ export function CTASection() {
             {/* Content */}
             <div className="space-y-6 text-center lg:text-left">
               <h2 className="font-display text-3xl font-bold text-primary-foreground sm:text-4xl lg:text-5xl">
-                Dê o primeiro passo com segurança
+                Dê o primeiro passo para o bem-estar do seu filho
               </h2>
               <p className="text-lg text-primary-foreground/80 max-w-lg mx-auto lg:mx-0">
-                Faça uma triagem inicial gratuita e descubra o caminho mais indicado 
-                para sua família, com orientação e equipe selecionada de terapeutas.
+                Faça sua triagem inicial gratuita e descubra como podemos ajudar
+                sua família a encontrar o caminho para uma vida mais equilibrada.
               </p>
 
               <ul className="space-y-3">

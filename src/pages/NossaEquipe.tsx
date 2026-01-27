@@ -1,6 +1,10 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
+import { useNavigate } from "react-router-dom";
 import { Layout } from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
+import { TherapistCard, type TherapistWithDetails } from "@/components/therapist/TherapistCard";
+import { TherapistFilters, type TherapistFiltersState } from "@/components/therapist/TherapistFilters";
+import { useTherapists } from "@/hooks/useTherapists";
 import {
   Dialog,
   DialogContent,
@@ -9,81 +13,10 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
-import { GraduationCap, Award, Heart, MapPin, X } from "lucide-react";
-
-interface Therapist {
-  name: string;
-  credentials: string;
-  specialty: string;
-  location: string;
-  areas: string[];
-  bio: string;
-  approach: string;
-  image: string;
-}
-
-const therapists: Therapist[] = [
-  {
-    name: "Dra. Carolina Mendes",
-    credentials: "CRP 06/12345",
-    specialty: "Psicóloga Infantil",
-    location: "São Paulo, SP",
-    areas: ["Ansiedade Infantil", "TDAH", "Transtornos de Aprendizagem"],
-    bio: "Especialista em psicologia infantil com formação em Terapia Cognitivo-Comportamental. Diretora clínica da Crescer, dedica-se a ajudar crianças e famílias a superarem desafios emocionais.",
-    approach: "Utilizo uma abordagem lúdica e acolhedora, adaptada à idade e às necessidades de cada criança. Trabalho em parceria com as famílias para promover mudanças duradouras.",
-    image: "https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=400&h=400&fit=crop&crop=face",
-  },
-  {
-    name: "Dra. Juliana Costa",
-    credentials: "CRP 06/67890",
-    specialty: "Psicóloga Clínica",
-    location: "São Paulo, SP",
-    areas: ["Depressão", "Fobia Social", "Terapia Familiar"],
-    bio: "Mestrado em Terapia Cognitivo-Comportamental pela PUC-SP. Atua com adolescentes e famílias, especialmente em casos de depressão e ansiedade social.",
-    approach: "Minha prática é baseada em evidências científicas, com foco no desenvolvimento de habilidades emocionais e sociais que ajudam os jovens a prosperarem.",
-    image: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=400&h=400&fit=crop&crop=face",
-  },
-  {
-    name: "Dra. Mariana Oliveira",
-    credentials: "CRP 06/11111",
-    specialty: "Neuropsicóloga",
-    location: "São Paulo, SP",
-    areas: ["Avaliação Neuropsicológica", "TDAH", "Dislexia"],
-    bio: "Especialização em Neuropsicologia pelo Hospital Albert Einstein. Realiza avaliações neuropsicológicas completas e acompanhamento de crianças com dificuldades de aprendizagem.",
-    approach: "Combino avaliação detalhada com intervenções práticas, trabalhando junto à escola e família para otimizar o desenvolvimento da criança.",
-    image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop&crop=face",
-  },
-  {
-    name: "Dr. Pedro Almeida",
-    credentials: "CRP 06/22222",
-    specialty: "Psicólogo Infantil",
-    location: "São Paulo, SP",
-    areas: ["Ansiedade", "TOC", "Medos e Fobias"],
-    bio: "Especialização em Terapia Infantil pela Universidade Mackenzie. Experiência em tratamento de transtornos de ansiedade e TOC em crianças e adolescentes.",
-    approach: "Utilizo técnicas de exposição gradual e terapia cognitiva adaptadas para crianças, sempre de forma lúdica e respeitando o ritmo de cada paciente.",
-    image: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=400&h=400&fit=crop&crop=face",
-  },
-  {
-    name: "Dra. Fernanda Lima",
-    credentials: "CRP 06/33333",
-    specialty: "Psicóloga do Desenvolvimento",
-    location: "São Paulo, SP",
-    areas: ["Treinamento de Pais", "Comportamento", "Sono Infantil"],
-    bio: "Mestrado em Desenvolvimento Infantil pela UFRJ. Especialista em orientação parental e problemas comportamentais na infância.",
-    approach: "Acredito que o envolvimento dos pais é essencial. Ofereço orientação prática e estratégias baseadas em evidências para lidar com desafios do dia a dia.",
-    image: "https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=400&h=400&fit=crop&crop=face",
-  },
-  {
-    name: "Dra. Amanda Santos",
-    credentials: "CRP 06/44444",
-    specialty: "Psicóloga Clínica",
-    location: "São Paulo, SP",
-    areas: ["Autismo", "Atrasos no Desenvolvimento", "Intervenção Precoce"],
-    bio: "Formação em ABA e intervenção precoce. Trabalha com crianças no espectro autista e suas famílias, promovendo desenvolvimento e qualidade de vida.",
-    approach: "Combino técnicas comportamentais com abordagem centrada na família, respeitando a individualidade de cada criança.",
-    image: "https://images.unsplash.com/photo-1614608682850-e0d6ed316d47?w=400&h=400&fit=crop&crop=face",
-  },
-];
+import { Calendar } from "@/components/ui/calendar";
+import { GraduationCap, Award, Heart, Loader2, User, Clock, DollarSign } from "lucide-react";
+import { format, addDays, setHours, setMinutes, isAfter, startOfDay } from "date-fns";
+import { ptBR } from "date-fns/locale";
 
 const highlights = [
   {
@@ -107,7 +40,92 @@ const highlights = [
 ];
 
 export default function NossaEquipe() {
-  const [selectedTherapist, setSelectedTherapist] = useState<Therapist | null>(null);
+  const navigate = useNavigate();
+  const [filters, setFilters] = useState<TherapistFiltersState>({
+    ageRange: "",
+    specialty: "",
+    priceRange: "",
+    availability: "",
+    approach: "",
+  });
+
+  const { therapists, specialties, approaches, loading } = useTherapists(filters);
+  const [selectedTherapist, setSelectedTherapist] = useState<TherapistWithDetails | null>(null);
+  const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined);
+  const [availableTimes, setAvailableTimes] = useState<string[]>([]);
+
+  const handleViewSchedule = (therapist: TherapistWithDetails) => {
+    setSelectedTherapist(therapist);
+    setSelectedDate(undefined);
+    setAvailableTimes([]);
+  };
+
+  const handleDateSelect = (date: Date | undefined) => {
+    setSelectedDate(date);
+    if (date && selectedTherapist?.availability) {
+      const dayOfWeek = date.getDay();
+      const slots = selectedTherapist.availability.filter(
+        (a) => a.day_of_week === dayOfWeek && a.is_active
+      );
+
+      const times: string[] = [];
+      const now = new Date();
+
+      slots.forEach((slot) => {
+        const [startHour, startMin] = slot.start_time.split(":").map(Number);
+        const [endHour, endMin] = slot.end_time.split(":").map(Number);
+
+        let currentHour = startHour;
+        let currentMin = startMin;
+
+        while (currentHour < endHour || (currentHour === endHour && currentMin < endMin)) {
+          const slotTime = setMinutes(setHours(date, currentHour), currentMin);
+
+          // Only add future times
+          if (isAfter(slotTime, now)) {
+            times.push(
+              `${String(currentHour).padStart(2, "0")}:${String(currentMin).padStart(2, "0")}`
+            );
+          }
+
+          currentMin += 50;
+          if (currentMin >= 60) {
+            currentHour += 1;
+            currentMin = currentMin - 60;
+          }
+        }
+      });
+
+      setAvailableTimes(times.sort());
+    }
+  };
+
+  const disabledDays = (date: Date) => {
+    const today = startOfDay(new Date());
+    if (date < today) return true;
+    if (date > addDays(today, 60)) return true;
+
+    if (!selectedTherapist?.availability) return true;
+
+    const dayOfWeek = date.getDay();
+    return !selectedTherapist.availability.some(
+      (a) => a.day_of_week === dayOfWeek && a.is_active
+    );
+  };
+
+  const formatPrice = (priceInCents: number | null) => {
+    if (!priceInCents) return "Sob consulta";
+    return new Intl.NumberFormat("pt-BR", {
+      style: "currency",
+      currency: "BRL",
+    }).format(priceInCents / 100);
+  };
+
+  const handleSelectTime = (time: string) => {
+    if (!selectedTherapist) return;
+    // Navigate to booking page with pre-selected data
+    navigate(`/agendar?therapist=${selectedTherapist.id}&date=${selectedDate?.toISOString()}&time=${time}`);
+  };
 
   return (
     <Layout>
@@ -119,12 +137,12 @@ export default function NossaEquipe() {
               Nossa equipe
             </span>
             <h1 className="font-display text-4xl font-bold tracking-tight text-foreground md:text-5xl">
-              Conheça nossos{" "}
-              <span className="text-primary">psicólogos</span>
+              Encontre o{" "}
+              <span className="text-primary">psicólogo ideal</span>
             </h1>
             <p className="mt-6 text-lg text-muted-foreground">
-              Nossa equipe é formada por psicólogos especializados em saúde mental 
-              infantojuvenil, prontos para cuidar da sua família.
+              Nossa rede curada de psicólogos especializados em saúde mental
+              infantojuvenil está pronta para cuidar da sua família.
             </p>
           </div>
         </div>
@@ -151,131 +169,172 @@ export default function NossaEquipe() {
         </div>
       </section>
 
-      {/* Therapists Grid */}
-      <section className="py-16 md:py-24">
+      {/* Filters */}
+      <section className="border-b border-border py-6">
         <div className="container-custom">
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {therapists.map((therapist, index) => (
-              <div
-                key={index}
-                className="group cursor-pointer rounded-2xl border border-border bg-card overflow-hidden shadow-sm transition-all hover:shadow-lg hover:border-primary/30"
-                onClick={() => setSelectedTherapist(therapist)}
-              >
-                {/* Photo */}
-                <div className="relative aspect-[4/3] overflow-hidden bg-muted">
-                  <img
-                    src={therapist.image}
-                    alt={therapist.name}
-                    className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-                  />
-                </div>
-
-                {/* Info */}
-                <div className="p-5">
-                  <h3 className="font-display text-xl font-semibold text-foreground">
-                    {therapist.name}
-                  </h3>
-                  <p className="mt-1 text-sm font-medium text-primary">
-                    {therapist.specialty}
-                  </p>
-                  <p className="text-xs text-muted-foreground">
-                    {therapist.credentials}
-                  </p>
-
-                  <div className="mt-3 flex items-center gap-1 text-sm text-muted-foreground">
-                    <MapPin className="h-4 w-4" />
-                    {therapist.location}
-                  </div>
-
-                  <Button
-                    variant="link"
-                    className="mt-3 h-auto p-0 text-primary"
-                  >
-                    Ver perfil completo →
-                  </Button>
-                </div>
-              </div>
-            ))}
-          </div>
+          <TherapistFilters
+            filters={filters}
+            onFiltersChange={setFilters}
+            specialties={specialties}
+            approaches={approaches}
+          />
         </div>
       </section>
 
-      {/* Therapist Modal */}
+      {/* Therapists Grid */}
+      <section className="py-16 md:py-24">
+        <div className="container-custom">
+          {loading ? (
+            <div className="flex items-center justify-center py-12">
+              <Loader2 className="h-8 w-8 animate-spin text-primary" />
+            </div>
+          ) : therapists.length === 0 ? (
+            <div className="py-12 text-center">
+              <User className="mx-auto mb-4 h-12 w-12 text-muted-foreground opacity-50" />
+              <h3 className="text-lg font-semibold text-foreground">
+                Nenhum terapeuta encontrado
+              </h3>
+              <p className="mt-1 text-muted-foreground">
+                Tente ajustar os filtros para encontrar mais opções
+              </p>
+              <Button
+                variant="outline"
+                className="mt-4"
+                onClick={() =>
+                  setFilters({
+                    ageRange: "",
+                    specialty: "",
+                    priceRange: "",
+                    availability: "",
+                    approach: "",
+                  })
+                }
+              >
+                Limpar filtros
+              </Button>
+            </div>
+          ) : (
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+              {therapists.map((therapist) => (
+                <TherapistCard
+                  key={therapist.id}
+                  therapist={therapist}
+                  onViewSchedule={handleViewSchedule}
+                />
+              ))}
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* Schedule Dialog */}
       <Dialog open={!!selectedTherapist} onOpenChange={() => setSelectedTherapist(null)}>
-        <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
+        <DialogContent className="max-w-lg max-h-[90vh] overflow-y-auto">
           {selectedTherapist && (
             <>
               <DialogHeader>
-                <DialogTitle className="sr-only">
-                  Perfil de {selectedTherapist.name}
+                <DialogTitle className="flex items-center gap-3">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10">
+                    {selectedTherapist.avatar_url ? (
+                      <img
+                        src={selectedTherapist.avatar_url}
+                        alt={selectedTherapist.full_name}
+                        className="h-10 w-10 rounded-full object-cover"
+                      />
+                    ) : (
+                      <User className="h-5 w-5 text-primary" />
+                    )}
+                  </div>
+                  <div>
+                    <span className="block">{selectedTherapist.full_name}</span>
+                    {selectedTherapist.therapeutic_approach && (
+                      <span className="block text-sm font-normal text-muted-foreground">
+                        {selectedTherapist.therapeutic_approach}
+                      </span>
+                    )}
+                  </div>
                 </DialogTitle>
                 <DialogDescription className="sr-only">
-                  Informações detalhadas sobre {selectedTherapist.name}
+                  Selecione uma data e horário para agendar com {selectedTherapist.full_name}
                 </DialogDescription>
               </DialogHeader>
 
-              <div className="flex flex-col md:flex-row gap-6">
-                {/* Photo */}
-                <div className="flex-shrink-0">
-                  <img
-                    src={selectedTherapist.image}
-                    alt={selectedTherapist.name}
-                    className="w-full md:w-48 h-48 object-cover rounded-xl"
-                  />
+              {/* Quick info */}
+              <div className="flex flex-wrap gap-3 border-b pb-4">
+                <div className="flex items-center gap-1.5 text-sm">
+                  <DollarSign className="h-4 w-4 text-muted-foreground" />
+                  <span className="font-medium">{formatPrice(selectedTherapist.session_price)}</span>
                 </div>
-
-                {/* Info */}
-                <div className="flex-1">
-                  <h2 className="font-display text-2xl font-bold text-foreground">
-                    {selectedTherapist.name}
-                  </h2>
-                  <p className="mt-1 text-lg font-medium text-primary">
-                    {selectedTherapist.specialty}
-                  </p>
-                  <p className="text-sm text-muted-foreground">
-                    {selectedTherapist.credentials}
-                  </p>
-
-                  <div className="mt-2 flex items-center gap-1 text-sm text-muted-foreground">
-                    <MapPin className="h-4 w-4" />
-                    {selectedTherapist.location}
+                {selectedTherapist.min_age && selectedTherapist.max_age && (
+                  <div className="flex items-center gap-1.5 text-sm">
+                    <User className="h-4 w-4 text-muted-foreground" />
+                    <span>{selectedTherapist.min_age} - {selectedTherapist.max_age} anos</span>
                   </div>
-
-                  <div className="mt-4 flex flex-wrap gap-2">
-                    {selectedTherapist.areas.map((area, i) => (
-                      <Badge key={i} variant="secondary">
-                        {area}
-                      </Badge>
-                    ))}
+                )}
+                {selectedTherapist.nextAvailable && (
+                  <div className="flex items-center gap-1.5 text-sm text-primary">
+                    <Clock className="h-4 w-4" />
+                    <span>
+                      Próximo:{" "}
+                      {format(selectedTherapist.nextAvailable, "EEE dd/MM HH:mm", {
+                        locale: ptBR,
+                      })}
+                    </span>
                   </div>
-                </div>
+                )}
               </div>
 
-              {/* Bio */}
-              <div className="mt-6 space-y-4">
-                <div>
-                  <h3 className="font-semibold text-foreground">Sobre</h3>
-                  <p className="mt-2 text-muted-foreground">
-                    {selectedTherapist.bio}
-                  </p>
+              {/* Specialties */}
+              {selectedTherapist.specialties && selectedTherapist.specialties.length > 0 && (
+                <div className="flex flex-wrap gap-1.5 pb-4 border-b">
+                  {selectedTherapist.specialties.map((s, i) => (
+                    <Badge key={i} variant="secondary" className="text-xs">
+                      {s.specialty.name}
+                    </Badge>
+                  ))}
                 </div>
+              )}
 
-                <div>
-                  <h3 className="font-semibold text-foreground">Abordagem</h3>
-                  <p className="mt-2 text-muted-foreground">
-                    {selectedTherapist.approach}
-                  </p>
-                </div>
+              {/* Calendar */}
+              <div className="pt-2">
+                <h4 className="font-medium text-foreground mb-3">Escolha uma data</h4>
+                <Calendar
+                  mode="single"
+                  selected={selectedDate}
+                  onSelect={handleDateSelect}
+                  disabled={disabledDays}
+                  locale={ptBR}
+                  className="rounded-md border mx-auto pointer-events-auto"
+                />
               </div>
 
-              {/* CTA */}
-              <div className="mt-6 pt-4 border-t">
-                <a href="/agendar">
-                  <Button className="w-full">
-                    Agendar com {selectedTherapist.name.split(" ")[0]}
-                  </Button>
-                </a>
-              </div>
+              {/* Times */}
+              {selectedDate && (
+                <div className="pt-4">
+                  <h4 className="font-medium text-foreground mb-3">
+                    Horários em {format(selectedDate, "dd/MM", { locale: ptBR })}
+                  </h4>
+                  {availableTimes.length === 0 ? (
+                    <p className="text-sm text-muted-foreground">
+                      Nenhum horário disponível nesta data
+                    </p>
+                  ) : (
+                    <div className="grid grid-cols-4 gap-2">
+                      {availableTimes.map((time) => (
+                        <Button
+                          key={time}
+                          variant="outline"
+                          size="sm"
+                          className="w-full"
+                          onClick={() => handleSelectTime(time)}
+                        >
+                          {time}
+                        </Button>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              )}
             </>
           )}
         </DialogContent>
@@ -288,14 +347,14 @@ export default function NossaEquipe() {
             Pronto para dar o primeiro passo?
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-primary-foreground/80">
-            Agende uma consulta inicial com um de nossos especialistas e
+            Agende uma triagem inicial com um de nossos especialistas e
             descubra como podemos ajudar sua família.
           </p>
           <a
             href="/agendar"
             className="mt-8 inline-flex items-center justify-center rounded-full bg-white px-8 py-3 font-semibold text-primary shadow-lg transition-all hover:bg-white/90 hover:shadow-xl"
           >
-            Agendar consulta
+            Agendar triagem
           </a>
         </div>
       </section>

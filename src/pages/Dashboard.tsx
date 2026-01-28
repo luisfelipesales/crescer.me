@@ -2,11 +2,14 @@ import { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import { useProfile } from "@/hooks/useProfile";
+import { usePostSessionOffer } from "@/hooks/usePostSessionOffer";
 import { Layout } from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { PostSessionOfferDialog } from "@/components/patient/PostSessionOfferDialog";
+import { ScheduleNextSessionCard } from "@/components/patient/ScheduleNextSessionCard";
 import { supabase } from "@/integrations/supabase/client";
-import { format, isFuture } from "date-fns";
+import { format, isFuture, differenceInDays } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import { Calendar, Clock, User, FileText, Settings, LogOut, Loader2, Shield } from "lucide-react";
 import type { Tables } from "@/integrations/supabase/types";
@@ -19,14 +22,23 @@ export default function Dashboard() {
   const navigate = useNavigate();
   const { user, loading, signOut } = useAuth();
   const { profile, isAdmin, isTherapist, loading: profileLoading } = useProfile();
+  const { pendingOffer, lastSession, activePackage, refresh: refreshOffers } = usePostSessionOffer(profile?.id);
   const [nextAppointment, setNextAppointment] = useState<Appointment | null>(null);
   const [loadingAppointment, setLoadingAppointment] = useState(true);
+  const [showOfferDialog, setShowOfferDialog] = useState(false);
 
   useEffect(() => {
     if (!loading && !user) {
       navigate("/auth");
     }
   }, [user, loading, navigate]);
+
+  // Mostrar dialog de oferta pós-sessão quando houver oferta pendente
+  useEffect(() => {
+    if (pendingOffer && !showOfferDialog) {
+      setShowOfferDialog(true);
+    }
+  }, [pendingOffer]);
 
   useEffect(() => {
     if (profile) {
@@ -214,6 +226,19 @@ export default function Dashboard() {
             </CardContent>
           </Card>
 
+          {/* CTA para agendar próxima sessão - aparece se teve sessão recente e não tem próxima agendada */}
+          {lastSession && !nextAppointment && differenceInDays(new Date(), lastSession.completed_at) <= 14 && (
+            <div className="mb-8">
+              <ScheduleNextSessionCard
+                therapistId={lastSession.therapist_id}
+                therapistName={lastSession.therapist_name}
+                lastSessionDate={lastSession.completed_at}
+                hasActivePackage={!!activePackage}
+                remainingSessions={activePackage?.remaining || 0}
+              />
+            </div>
+          )}
+
           {/* Quick Actions */}
           <h2 className="mb-4 font-display text-xl font-semibold text-foreground">
             Acesso rápido
@@ -250,6 +275,18 @@ export default function Dashboard() {
           </div>
         </div>
       </div>
+
+      {/* Dialog de oferta pós-sessão */}
+      {pendingOffer && (
+        <PostSessionOfferDialog
+          open={showOfferDialog}
+          onOpenChange={setShowOfferDialog}
+          offer={pendingOffer}
+          patientId={profile?.id || ""}
+          onAccept={refreshOffers}
+          onDecline={refreshOffers}
+        />
+      )}
     </Layout>
   );
 }

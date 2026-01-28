@@ -352,6 +352,64 @@ export type Database = {
           },
         ]
       }
+      post_session_offers: {
+        Row: {
+          appointment_id: string
+          created_at: string
+          id: string
+          offer_type: string
+          patient_id: string
+          responded_at: string | null
+          shown_at: string | null
+          status: string
+          therapist_id: string
+        }
+        Insert: {
+          appointment_id: string
+          created_at?: string
+          id?: string
+          offer_type?: string
+          patient_id: string
+          responded_at?: string | null
+          shown_at?: string | null
+          status?: string
+          therapist_id: string
+        }
+        Update: {
+          appointment_id?: string
+          created_at?: string
+          id?: string
+          offer_type?: string
+          patient_id?: string
+          responded_at?: string | null
+          shown_at?: string | null
+          status?: string
+          therapist_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "post_session_offers_appointment_id_fkey"
+            columns: ["appointment_id"]
+            isOneToOne: true
+            referencedRelation: "appointments"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "post_session_offers_patient_id_fkey"
+            columns: ["patient_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "post_session_offers_therapist_id_fkey"
+            columns: ["therapist_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       profiles: {
         Row: {
           avatar_url: string | null
@@ -457,6 +515,66 @@ export type Database = {
           },
           {
             foreignKeyName: "session_logs_therapist_id_fkey"
+            columns: ["therapist_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      session_packages: {
+        Row: {
+          created_at: string
+          discount_percent: number
+          expires_at: string | null
+          id: string
+          patient_id: string
+          price_per_session: number
+          purchased_at: string
+          status: string
+          therapist_id: string
+          total_sessions: number
+          updated_at: string
+          used_sessions: number
+        }
+        Insert: {
+          created_at?: string
+          discount_percent?: number
+          expires_at?: string | null
+          id?: string
+          patient_id: string
+          price_per_session: number
+          purchased_at?: string
+          status?: string
+          therapist_id: string
+          total_sessions?: number
+          updated_at?: string
+          used_sessions?: number
+        }
+        Update: {
+          created_at?: string
+          discount_percent?: number
+          expires_at?: string | null
+          id?: string
+          patient_id?: string
+          price_per_session?: number
+          purchased_at?: string
+          status?: string
+          therapist_id?: string
+          total_sessions?: number
+          updated_at?: string
+          used_sessions?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "session_packages_patient_id_fkey"
+            columns: ["patient_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "session_packages_therapist_id_fkey"
             columns: ["therapist_id"]
             isOneToOne: false
             referencedRelation: "profiles"

@@ -11,6 +11,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
 import { supabase } from "@/integrations/supabase/client";
+import { logError } from "@/lib/errorLogger";
 import { toast } from "sonner";
 import { format } from "date-fns";
 import {
@@ -100,7 +101,7 @@ export default function Perfil() {
         setPatientInsurance((patientIns as PatientInsurance[]) || []);
       }
     } catch (error) {
-      console.error("Error fetching insurance:", error);
+      logError("Perfil.fetchInsuranceData", error);
     }
   };
 
@@ -115,7 +116,7 @@ export default function Perfil() {
 
       setChildren((data as ChildLink[]) || []);
     } catch (error) {
-      console.error("Error fetching children:", error);
+      logError("Perfil.fetchChildren", error);
     }
   };
 
@@ -139,7 +140,7 @@ export default function Perfil() {
       toast.success("Perfil atualizado com sucesso!");
       refetch();
     } catch (error: any) {
-      console.error("Error saving profile:", error);
+      logError("Perfil.handleSaveProfile", error);
       toast.error(error.message || "Erro ao salvar perfil");
     } finally {
       setSaving(false);
@@ -164,7 +165,7 @@ export default function Perfil() {
       setPolicyNumber("");
       fetchInsuranceData();
     } catch (error: any) {
-      console.error("Error adding insurance:", error);
+      logError("Perfil.handleAddInsurance", error);
       toast.error(error.message || "Erro ao adicionar convênio");
     } finally {
       setAddingInsurance(false);
@@ -180,7 +181,7 @@ export default function Perfil() {
       toast.success("Convênio removido");
       fetchInsuranceData();
     } catch (error: any) {
-      console.error("Error removing insurance:", error);
+      logError("Perfil.handleRemoveInsurance", error);
       toast.error(error.message || "Erro ao remover convênio");
     }
   };
@@ -218,7 +219,7 @@ export default function Perfil() {
       setNewChildDob("");
       fetchChildren();
     } catch (error: any) {
-      console.error("Error adding child:", error);
+      logError("Perfil.handleAddChild", error);
       toast.error(error.message || "Erro ao adicionar dependente");
     } finally {
       setAddingChild(false);

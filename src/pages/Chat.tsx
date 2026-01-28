@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import { useProfile } from "@/hooks/useProfile";
 import { Layout } from "@/components/layout/Layout";
-import { ChatSidebar } from "@/components/chat/ChatSidebar";
+import { ChatSidebar, type ChatContact } from "@/components/chat/ChatSidebar";
 import { ChatMessages } from "@/components/chat/ChatMessages";
 import { Loader2, MessageSquare } from "lucide-react";
 import type { Tables } from "@/integrations/supabase/types";
@@ -12,7 +12,7 @@ export default function Chat() {
   const navigate = useNavigate();
   const { user, loading: authLoading } = useAuth();
   const { profile, loading: profileLoading } = useProfile();
-  const [selectedContact, setSelectedContact] = useState<Tables<"profiles"> | null>(null);
+  const [selectedContact, setSelectedContact] = useState<ChatContact | null>(null);
 
   useEffect(() => {
     if (!authLoading && !user) {

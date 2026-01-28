@@ -10,6 +10,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Calendar } from "@/components/ui/calendar";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { supabase } from "@/integrations/supabase/client";
+import { logError } from "@/lib/errorLogger";
 import { toast } from "sonner";
 import { format, addDays, setHours, setMinutes, isBefore, isAfter } from "date-fns";
 import { ptBR } from "date-fns/locale";
@@ -103,7 +104,7 @@ export default function Agendar() {
       if (error) throw error;
       setTherapists((data as Therapist[]) || []);
     } catch (error) {
-      console.error("Error fetching therapists:", error);
+      logError("Agendar.fetchTherapists", error);
       toast.error("Erro ao carregar terapeutas");
     } finally {
       setLoading(false);
@@ -123,7 +124,7 @@ export default function Agendar() {
       const childProfiles = data?.map((d) => d.child).filter(Boolean) as Tables<"profiles">[];
       setChildren(childProfiles || []);
     } catch (error) {
-      console.error("Error fetching children:", error);
+      logError("Agendar.fetchChildren", error);
     }
   };
 
@@ -215,7 +216,7 @@ export default function Agendar() {
       toast.success("Consulta agendada com sucesso!");
       setStep(4);
     } catch (error: any) {
-      console.error("Error scheduling appointment:", error);
+      logError("Agendar.handleSubmit", error);
       toast.error(error.message || "Erro ao agendar consulta");
     } finally {
       setSubmitting(false);

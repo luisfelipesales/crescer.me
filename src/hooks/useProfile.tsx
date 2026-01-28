@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useAuth } from "./useAuth";
 import { supabase } from "@/integrations/supabase/client";
+import { logError } from "@/lib/errorLogger";
 import type { Tables, Enums } from "@/integrations/supabase/types";
 
 type Profile = Tables<"profiles">;
@@ -38,7 +39,7 @@ export function useProfile(): UseProfileReturn {
         .single();
 
       if (profileError && profileError.code !== "PGRST116") {
-        console.error("Error fetching profile:", profileError);
+        logError("useProfile.fetchProfile", profileError);
       }
 
       setProfile(profileData);
@@ -50,12 +51,12 @@ export function useProfile(): UseProfileReturn {
         .eq("user_id", user.id);
 
       if (rolesError) {
-        console.error("Error fetching roles:", rolesError);
+        logError("useProfile.fetchRoles", rolesError);
       }
 
       setRoles(rolesData?.map((r) => r.role) || []);
     } catch (error) {
-      console.error("Error in fetchProfile:", error);
+      logError("useProfile.fetchProfile.catch", error);
     } finally {
       setLoading(false);
     }

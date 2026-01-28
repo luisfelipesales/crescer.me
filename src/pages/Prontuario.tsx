@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import { useProfile } from "@/hooks/useProfile";
 import { supabase } from "@/integrations/supabase/client";
+import { logError } from "@/lib/errorLogger";
 import { Layout } from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
@@ -158,7 +159,7 @@ export default function Prontuario() {
       setDiagnoses(diagnosesData || []);
       
     } catch (error) {
-      console.error("Erro ao carregar dados:", error);
+      logError("Prontuario.fetchPatientData", error);
       toast.error("Erro ao carregar prontuário");
     } finally {
       setLoading(false);
@@ -216,7 +217,7 @@ export default function Prontuario() {
       resetRecordForm();
       fetchPatientData();
     } catch (error) {
-      console.error("Erro ao salvar registro:", error);
+      logError("Prontuario.handleSaveRecord", error);
       toast.error("Erro ao salvar registro");
     }
   };
@@ -248,7 +249,7 @@ export default function Prontuario() {
       resetDiagnosisForm();
       fetchPatientData();
     } catch (error) {
-      console.error("Erro ao salvar diagnóstico:", error);
+      logError("Prontuario.handleSaveDiagnosis", error);
       toast.error("Erro ao salvar diagnóstico");
     }
   };
@@ -264,7 +265,7 @@ export default function Prontuario() {
       toast.success("Status atualizado");
       fetchPatientData();
     } catch (error) {
-      console.error("Erro ao atualizar status:", error);
+      logError("Prontuario.handleUpdateDiagnosisStatus", error);
       toast.error("Erro ao atualizar status");
     }
   };

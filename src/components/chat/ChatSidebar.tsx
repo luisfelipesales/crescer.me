@@ -5,15 +5,24 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { supabase } from "@/integrations/supabase/client";
 import { Search, Loader2 } from "lucide-react";
+import { logError } from "@/lib/errorLogger";
 import type { Tables } from "@/integrations/supabase/types";
+
+// Minimal contact info needed for chat sidebar
+export interface ChatContact {
+  id: string;
+  full_name: string;
+  profile_type: Tables<"profiles">["profile_type"];
+  avatar_url: string | null;
+}
 
 interface ChatSidebarProps {
   currentUserId: string;
   selectedContactId: string | null;
-  onSelectContact: (contact: Tables<"profiles">) => void;
+  onSelectContact: (contact: ChatContact) => void;
 }
 
-type ContactWithUnread = Tables<"profiles"> & { unreadCount: number };
+type ContactWithUnread = ChatContact & { unreadCount: number };
 
 export function ChatSidebar({
   currentUserId,
@@ -31,10 +40,13 @@ export function ChatSidebar({
   const fetchContacts = async () => {
     setLoading(true);
     try {
-      // Fetch all profiles (except current user)
+      // Fetch only therapist profiles for patient chat contacts
+      // RLS policies also enforce this, but explicit filtering is more efficient
+      // and makes the intent clear for developers
       const { data: profiles, error: profilesError } = await supabase
         .from("profiles")
-        .select("*")
+        .select("id, full_name, profile_type, avatar_url")
+        .eq("profile_type", "therapist")
         .neq("id", currentUserId)
         .order("full_name");
 
@@ -71,7 +83,7 @@ export function ChatSidebar({
 
       setContacts(contactsWithUnread);
     } catch (error) {
-      console.error("Error fetching contacts:", error);
+      logError("ChatSidebar.fetchContacts", error);
     } finally {
       setLoading(false);
     }

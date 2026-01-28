@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { supabase } from "@/integrations/supabase/client";
 import { Loader2, Save, Plus, Trash2 } from "lucide-react";
 import { toast } from "sonner";
+import { logError } from "@/lib/errorLogger";
 import type { Tables } from "@/integrations/supabase/types";
 
 interface AvailabilityManagerProps {
@@ -47,7 +48,7 @@ export function AvailabilityManager({ therapistId }: AvailabilityManagerProps) {
       if (error) throw error;
       setAvailability(data || []);
     } catch (error) {
-      console.error("Error fetching availability:", error);
+      logError("AvailabilityManager.fetchAvailability", error);
       toast.error("Erro ao carregar disponibilidade");
     } finally {
       setLoading(false);
@@ -72,7 +73,7 @@ export function AvailabilityManager({ therapistId }: AvailabilityManagerProps) {
       setAvailability([...availability, data]);
       toast.success("Horário adicionado");
     } catch (error) {
-      console.error("Error adding time slot:", error);
+      logError("AvailabilityManager.addTimeSlot", error);
       toast.error("Erro ao adicionar horário");
     }
   };
@@ -96,7 +97,7 @@ export function AvailabilityManager({ therapistId }: AvailabilityManagerProps) {
         )
       );
     } catch (error) {
-      console.error("Error updating time slot:", error);
+      logError("AvailabilityManager.updateTimeSlot", error);
       toast.error("Erro ao atualizar horário");
     }
   };
@@ -113,7 +114,7 @@ export function AvailabilityManager({ therapistId }: AvailabilityManagerProps) {
       setAvailability(availability.filter((slot) => slot.id !== id));
       toast.success("Horário removido");
     } catch (error) {
-      console.error("Error deleting time slot:", error);
+      logError("AvailabilityManager.deleteTimeSlot", error);
       toast.error("Erro ao remover horário");
     }
   };

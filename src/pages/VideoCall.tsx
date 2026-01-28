@@ -5,6 +5,7 @@ import { useProfile } from "@/hooks/useProfile";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { supabase } from "@/integrations/supabase/client";
+import { logError } from "@/lib/errorLogger";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import {
@@ -96,7 +97,7 @@ export default function VideoCall() {
 
       setAppointment(data as Appointment);
     } catch (error) {
-      console.error("Error fetching appointment:", error);
+      logError("VideoCall.fetchAppointment", error);
       navigate("/consultas");
     } finally {
       setLoading(false);

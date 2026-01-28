@@ -25,6 +25,7 @@ import {
   MapPin,
 } from "lucide-react";
 import type { Tables } from "@/integrations/supabase/types";
+import { SchedulingBenefits } from "@/components/scheduling/SchedulingBenefits";
 
 type Therapist = Tables<"profiles"> & {
   availability?: Tables<"therapist_availability">[];
@@ -276,6 +277,13 @@ export default function Agendar() {
               {step === 4 && "Consulta agendada!"}
             </p>
           </div>
+
+          {/* Benefits Section - shown on step 1 */}
+          {step === 1 && (
+            <div className="mb-8">
+              <SchedulingBenefits />
+            </div>
+          )}
 
           {/* Progress */}
           <div className="mb-8 flex gap-2">

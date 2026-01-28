@@ -7,6 +7,8 @@ import { supabase } from "@/integrations/supabase/client";
 import { Send, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { logError } from "@/lib/errorLogger";
+import { detectContactInfo } from "@/lib/contactDetection";
+import { ContactBlockedDialog } from "./ContactBlockedDialog";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import type { Tables } from "@/integrations/supabase/types";
@@ -35,6 +37,8 @@ export function ChatMessages({
   const [loading, setLoading] = useState(true);
   const [sending, setSending] = useState(false);
   const [newMessage, setNewMessage] = useState("");
+  const [showBlockedDialog, setShowBlockedDialog] = useState(false);
+  const [blockedType, setBlockedType] = useState<"phone" | "email" | "url" | "social" | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -113,6 +117,17 @@ export function ChatMessages({
 
   const sendMessage = async () => {
     if (!newMessage.trim()) return;
+
+    // Check for contact information before sending
+    const detection = detectContactInfo(newMessage);
+    if (detection.hasContact) {
+      setBlockedType(detection.type);
+      setShowBlockedDialog(true);
+      
+      // Log the attempt for auditing (without storing the actual content)
+      console.info("Contact sharing attempt blocked:", detection.type);
+      return;
+    }
 
     setSending(true);
     try {
@@ -265,6 +280,13 @@ export function ChatMessages({
           </Button>
         </div>
       </div>
+
+      {/* Contact Blocked Dialog */}
+      <ContactBlockedDialog
+        open={showBlockedDialog}
+        onOpenChange={setShowBlockedDialog}
+        blockedType={blockedType}
+      />
     </div>
   );
 }

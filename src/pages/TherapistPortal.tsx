@@ -28,6 +28,7 @@ import { TherapistSettings } from "@/components/therapist/TherapistSettings";
 import { TherapistPatients } from "@/components/therapist/TherapistPatients";
 import { TherapistAppointments } from "@/components/therapist/TherapistAppointments";
 import { TherapistPayouts } from "@/components/therapist/TherapistPayouts";
+import { TherapistBenefitsCarousel } from "@/components/therapist/TherapistBenefitsCarousel";
 import { toast } from "sonner";
 
 export default function TherapistPortal() {
@@ -227,6 +228,11 @@ export default function TherapistPortal() {
                 </CardContent>
               </Card>
             ))}
+          </div>
+
+          {/* Benefits Carousel */}
+          <div className="mb-8">
+            <TherapistBenefitsCarousel />
           </div>
 
           {/* Tabs */}

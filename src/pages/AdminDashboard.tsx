@@ -8,6 +8,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { supabase } from "@/integrations/supabase/client";
+import { logError } from "@/lib/errorLogger";
 import {
   Calendar,
   Users,
@@ -110,7 +111,7 @@ export default function AdminDashboard() {
 
       setTherapists(therapistsData || []);
     } catch (error) {
-      console.error("Error fetching data:", error);
+      logError("AdminDashboard.fetchData", error);
     } finally {
       setLoadingData(false);
     }
@@ -128,7 +129,7 @@ export default function AdminDashboard() {
 
       fetchData();
     } catch (error) {
-      console.error("Error updating appointment:", error);
+      logError("AdminDashboard.updateAppointmentStatus", error);
     }
   };
 

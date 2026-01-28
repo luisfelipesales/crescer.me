@@ -8,6 +8,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { supabase } from "@/integrations/supabase/client";
+import { logError } from "@/lib/errorLogger";
 import { format, isPast, isToday, isFuture } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import {
@@ -67,7 +68,7 @@ export default function Consultas() {
       if (error) throw error;
       setAppointments((data as Appointment[]) || []);
     } catch (error) {
-      console.error("Error fetching appointments:", error);
+      logError("Consultas.fetchAppointments", error);
     } finally {
       setLoading(false);
     }
@@ -83,7 +84,7 @@ export default function Consultas() {
       if (error) throw error;
       fetchAppointments();
     } catch (error) {
-      console.error("Error cancelling appointment:", error);
+      logError("Consultas.cancelAppointment", error);
     }
   };
 

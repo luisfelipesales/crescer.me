@@ -6,14 +6,22 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { supabase } from "@/integrations/supabase/client";
 import { Send, Loader2 } from "lucide-react";
 import { toast } from "sonner";
+import { logError } from "@/lib/errorLogger";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import type { Tables } from "@/integrations/supabase/types";
 
+// Minimal contact info needed for chat
+interface ChatContact {
+  id: string;
+  full_name: string;
+  profile_type: Tables<"profiles">["profile_type"];
+}
+
 interface ChatMessagesProps {
   currentUserId: string;
   currentUserName: string;
-  contact: Tables<"profiles">;
+  contact: ChatContact;
 }
 
 type Message = Tables<"messages">;
@@ -83,7 +91,7 @@ export function ChatMessages({
       if (error) throw error;
       setMessages(data || []);
     } catch (error) {
-      console.error("Error fetching messages:", error);
+      logError("ChatMessages.fetchMessages", error);
       toast.error("Erro ao carregar mensagens");
     } finally {
       setLoading(false);
@@ -99,7 +107,7 @@ export function ChatMessages({
         .eq("recipient_id", currentUserId)
         .eq("is_read", false);
     } catch (error) {
-      console.error("Error marking messages as read:", error);
+      logError("ChatMessages.markMessagesAsRead", error);
     }
   };
 
@@ -123,7 +131,7 @@ export function ChatMessages({
       setMessages([...messages, data]);
       setNewMessage("");
     } catch (error) {
-      console.error("Error sending message:", error);
+      logError("ChatMessages.sendMessage", error);
       toast.error("Erro ao enviar mensagem");
     } finally {
       setSending(false);

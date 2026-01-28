@@ -152,6 +152,17 @@ export function TherapistAppointments({
         .update({ status: "completed" })
         .eq("id", selectedAppointment.id);
 
+      // Criar oferta pós-sessão para o paciente (se compareceu)
+      if (logData.attended) {
+        await supabase.from("post_session_offers").insert({
+          appointment_id: selectedAppointment.id,
+          patient_id: selectedAppointment.patient_id,
+          therapist_id: therapistId,
+          offer_type: "package_4",
+          status: "pending",
+        });
+      }
+
       toast.success("Registro salvo com sucesso!");
       setShowLogDialog(false);
       fetchAppointments();

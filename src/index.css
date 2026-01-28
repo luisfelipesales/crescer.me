@@ -41,6 +41,10 @@
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 100%;
 
+    /* Success - for positive actions and confirmations */
+    --success: 160 60% 40%;
+    --success-foreground: 0 0% 100%;
+
     /* Borders and inputs */
     --border: 40 20% 88%;
     --input: 40 20% 88%;
@@ -109,6 +113,9 @@
 
     --destructive: 0 62% 45%;
     --destructive-foreground: 0 0% 100%;
+
+    --success: 160 50% 45%;
+    --success-foreground: 0 0% 100%;
 
     --border: 220 20% 20%;
     --input: 220 20% 20%;

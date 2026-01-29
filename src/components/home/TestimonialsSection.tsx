@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ChevronLeft, ChevronRight, Quote, Star } from "lucide-react";
+import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const testimonials = [
@@ -9,7 +9,7 @@ const testimonials = [
     author: "Marina S.",
     role: "Mãe de Sofia, 9 anos",
     condition: "Ansiedade",
-    rating: 5,
+    color: "bg-mint",
   },
   {
     content:
@@ -17,7 +17,7 @@ const testimonials = [
     author: "Carlos e Ana",
     role: "Pais de Lucas, 7 anos",
     condition: "TDAH",
-    rating: 5,
+    color: "bg-lavender",
   },
   {
     content:
@@ -25,7 +25,7 @@ const testimonials = [
     author: "Patrícia M.",
     role: "Mãe de Gabriel, 15 anos",
     condition: "Autoestima",
-    rating: 5,
+    color: "bg-peach",
   },
   {
     content:
@@ -33,7 +33,7 @@ const testimonials = [
     author: "Fernanda L.",
     role: "Mãe de Beatriz, 11 anos",
     condition: "TOC",
-    rating: 5,
+    color: "bg-sky",
   },
 ];
 
@@ -49,11 +49,10 @@ export function TestimonialsSection() {
   };
 
   return (
-    <section className="section-padding bg-secondary/30">
+    <section className="section-padding bg-gradient-to-br from-primary/5 via-background to-accent/5">
       <div className="container-custom">
-        <div className="text-center mb-16">
-          <div className="pill-badge mx-auto mb-4">Depoimentos</div>
-          <h2 className="font-display text-3xl font-bold text-foreground sm:text-4xl lg:text-5xl">
+        <div className="text-center mb-12">
+          <h2 className="font-display text-3xl font-bold text-foreground sm:text-4xl">
             O que as famílias dizem
           </h2>
           <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
@@ -66,21 +65,16 @@ export function TestimonialsSection() {
           {testimonials.map((testimonial, index) => (
             <div
               key={index}
-              className="group relative overflow-hidden rounded-3xl bg-card border border-border/50 p-6 transition-all duration-300 hover:shadow-xl"
+              className="group relative overflow-hidden rounded-2xl bg-card p-6 shadow-md transition-all hover:shadow-xl"
             >
-              {/* Rating */}
-              <div className="flex gap-1 mb-4">
-                {[...Array(testimonial.rating)].map((_, i) => (
-                  <Star key={i} className="h-4 w-4 fill-primary text-primary" />
-                ))}
-              </div>
-              
+              <Quote className="h-8 w-8 text-primary/20 mb-4" />
               <p className="text-muted-foreground text-sm leading-relaxed mb-6">
                 "{testimonial.content}"
               </p>
-              
               <div className="flex items-center gap-3">
-                <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center font-display font-bold text-primary text-lg">
+                <div
+                  className={`h-12 w-12 rounded-full ${testimonial.color} flex items-center justify-center font-display font-bold text-foreground`}
+                >
                   {testimonial.author.charAt(0)}
                 </div>
                 <div>
@@ -90,8 +84,9 @@ export function TestimonialsSection() {
                   <p className="text-xs text-muted-foreground">{testimonial.role}</p>
                 </div>
               </div>
-              
-              <span className="absolute top-6 right-6 inline-flex items-center rounded-full bg-secondary px-3 py-1 text-xs font-medium text-secondary-foreground">
+              <span
+                className={`absolute top-4 right-4 inline-flex items-center rounded-full ${testimonial.color} px-2 py-1 text-xs font-medium`}
+              >
                 {testimonial.condition}
               </span>
             </div>
@@ -100,21 +95,16 @@ export function TestimonialsSection() {
 
         {/* Mobile - Carousel */}
         <div className="md:hidden">
-          <div className="relative overflow-hidden rounded-3xl bg-card border border-border/50 p-6 shadow-lg">
-            {/* Rating */}
-            <div className="flex gap-1 mb-4">
-              {[...Array(testimonials[currentIndex].rating)].map((_, i) => (
-                <Star key={i} className="h-4 w-4 fill-primary text-primary" />
-              ))}
-            </div>
-            
+          <div className="relative overflow-hidden rounded-2xl bg-card p-6 shadow-lg">
+            <Quote className="h-8 w-8 text-primary/20 mb-4" />
             <p className="text-muted-foreground leading-relaxed mb-6">
               "{testimonials[currentIndex].content}"
             </p>
-            
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center font-display font-bold text-primary text-lg">
+                <div
+                  className={`h-12 w-12 rounded-full ${testimonials[currentIndex].color} flex items-center justify-center font-display font-bold text-foreground`}
+                >
                   {testimonials[currentIndex].author.charAt(0)}
                 </div>
                 <div>
@@ -126,7 +116,9 @@ export function TestimonialsSection() {
                   </p>
                 </div>
               </div>
-              <span className="inline-flex items-center rounded-full bg-secondary px-3 py-1 text-xs font-medium text-secondary-foreground">
+              <span
+                className={`inline-flex items-center rounded-full ${testimonials[currentIndex].color} px-3 py-1 text-xs font-medium`}
+              >
                 {testimonials[currentIndex].condition}
               </span>
             </div>
@@ -146,10 +138,10 @@ export function TestimonialsSection() {
                 <button
                   key={index}
                   onClick={() => setCurrentIndex(index)}
-                  className={`h-2 rounded-full transition-all ${
+                  className={`h-2 w-2 rounded-full transition-all ${
                     index === currentIndex
                       ? "w-6 bg-primary"
-                      : "w-2 bg-muted-foreground/30"
+                      : "bg-muted-foreground/30"
                   }`}
                 />
               ))}

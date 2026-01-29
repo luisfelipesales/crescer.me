@@ -10,6 +10,8 @@ const audiences = [
     description:
       "Ajudamos crianças a desenvolver habilidades emocionais através de terapia lúdica e técnicas adaptadas à sua idade.",
     conditions: ["Ansiedade", "TDAH", "Comportamento", "Medos"],
+    color: "bg-mint",
+    borderColor: "border-mint-foreground/20",
   },
   {
     emoji: "🧑‍🎓",
@@ -18,6 +20,8 @@ const audiences = [
     description:
       "Apoiamos adolescentes nos desafios únicos dessa fase, desde pressão escolar até questões de identidade.",
     conditions: ["Depressão", "Autoestima", "Redes Sociais", "Estresse"],
+    color: "bg-lavender",
+    borderColor: "border-lavender-foreground/20",
   },
   {
     emoji: "🎓",
@@ -26,6 +30,8 @@ const audiences = [
     description:
       "Auxiliamos na transição para a vida adulta, incluindo faculdade, carreira e relacionamentos.",
     conditions: ["Transições", "Ansiedade Social", "Independência"],
+    color: "bg-peach",
+    borderColor: "border-peach-foreground/20",
   },
   {
     emoji: "👨‍👩‍👧‍👦",
@@ -34,16 +40,17 @@ const audiences = [
     description:
       "Treinamos pais com ferramentas práticas para apoiar seus filhos e melhorar a dinâmica familiar.",
     conditions: ["Comunicação", "Limites", "Conflitos", "Apoio"],
+    color: "bg-sky",
+    borderColor: "border-sky-foreground/20",
   },
 ];
 
 export function AudienceSection() {
   return (
-    <section className="section-padding bg-background">
+    <section className="section-padding">
       <div className="container-custom">
-        <div className="text-center mb-16">
-          <div className="pill-badge mx-auto mb-4">Para você</div>
-          <h2 className="font-display text-3xl font-bold text-foreground sm:text-4xl lg:text-5xl">
+        <div className="text-center mb-12">
+          <h2 className="font-display text-3xl font-bold text-foreground sm:text-4xl">
             Quem atendemos
           </h2>
           <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
@@ -56,9 +63,11 @@ export function AudienceSection() {
           {audiences.map((audience, index) => (
             <div
               key={index}
-              className="group relative overflow-hidden rounded-3xl bg-card border border-border/50 p-6 transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
+              className={`group relative overflow-hidden rounded-2xl border ${audience.borderColor} bg-card p-6 card-hover`}
             >
-              <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-secondary mb-5">
+              <div
+                className={`inline-flex h-16 w-16 items-center justify-center rounded-2xl ${audience.color} mb-4`}
+              >
                 <span className="text-3xl">{audience.emoji}</span>
               </div>
 
@@ -67,7 +76,7 @@ export function AudienceSection() {
                   <h3 className="font-display text-xl font-bold text-foreground">
                     {audience.title}
                   </h3>
-                  <p className="text-sm text-primary font-medium">{audience.age}</p>
+                  <p className="text-sm text-muted-foreground">{audience.age}</p>
                 </div>
 
                 <p className="text-muted-foreground text-sm leading-relaxed">
@@ -78,7 +87,7 @@ export function AudienceSection() {
                   {audience.conditions.map((condition) => (
                     <span
                       key={condition}
-                      className="inline-flex items-center rounded-full bg-secondary px-3 py-1 text-xs font-medium text-secondary-foreground"
+                      className="inline-flex items-center rounded-full bg-muted px-3 py-1 text-xs font-medium text-muted-foreground"
                     >
                       {condition}
                     </span>
@@ -86,7 +95,7 @@ export function AudienceSection() {
                 </div>
               </div>
 
-              {/* Hover gradient line */}
+              {/* Hover indicator */}
               <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-primary to-accent scale-x-0 transition-transform group-hover:scale-x-100" />
             </div>
           ))}
@@ -94,7 +103,7 @@ export function AudienceSection() {
 
         <div className="mt-12 text-center">
           <Link to="/abordagem">
-            <Button variant="outline" size="lg" className="group h-12 px-8">
+            <Button variant="outline" size="lg" className="group">
               Conheça nossa abordagem
               <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Button>

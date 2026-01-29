@@ -4,112 +4,111 @@
 
 /* ============================================
    CRESCER - DESIGN SYSTEM
-   Inspirado no Zenklub - Clean, moderno, roxo
+   Plataforma de saúde mental infantojuvenil
    ============================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800&family=Quicksand:wght@400;500;600;700&display=swap');
 
 @layer base {
   :root {
-    /* Core brand colors - Clean, professional purple palette */
-    --background: 0 0% 100%;
-    --foreground: 240 10% 10%;
+    /* Core brand colors - Warm, welcoming, professional */
+    --background: 40 33% 98%;
+    --foreground: 220 30% 15%;
 
     --card: 0 0% 100%;
-    --card-foreground: 240 10% 10%;
+    --card-foreground: 220 30% 15%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 240 10% 10%;
+    --popover-foreground: 220 30% 15%;
 
-    /* Primary - Deep Purple (like Zenklub) */
-    --primary: 262 80% 50%;
+    /* Primary - Deep teal (trust, calm, professionalism) */
+    --primary: 174 58% 32%;
     --primary-foreground: 0 0% 100%;
 
-    /* Secondary - Soft purple tint */
-    --secondary: 262 40% 96%;
-    --secondary-foreground: 262 80% 40%;
+    /* Secondary - Soft sage green (growth, healing) */
+    --secondary: 150 25% 92%;
+    --secondary-foreground: 174 58% 25%;
 
-    /* Muted - Light gray */
-    --muted: 240 5% 96%;
-    --muted-foreground: 240 5% 45%;
+    /* Muted - Warm gray */
+    --muted: 40 20% 94%;
+    --muted-foreground: 220 15% 45%;
 
-    /* Accent - Vibrant purple/pink */
-    --accent: 280 70% 55%;
+    /* Accent - Warm coral (energy, approachability) */
+    --accent: 15 85% 60%;
     --accent-foreground: 0 0% 100%;
 
     /* Destructive */
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 100%;
 
-    /* Success */
+    /* Success - for positive actions and confirmations */
     --success: 160 60% 40%;
     --success-foreground: 0 0% 100%;
 
     /* Borders and inputs */
-    --border: 240 10% 90%;
-    --input: 240 10% 90%;
-    --ring: 262 80% 50%;
+    --border: 40 20% 88%;
+    --input: 40 20% 88%;
+    --ring: 174 58% 32%;
 
     --radius: 0.75rem;
 
     /* Extended palette */
-    --lavender: 262 60% 94%;
-    --lavender-foreground: 262 60% 35%;
+    --lavender: 270 50% 92%;
+    --lavender-foreground: 270 40% 35%;
     
-    --mint: 160 40% 92%;
-    --mint-foreground: 160 40% 30%;
+    --mint: 160 40% 90%;
+    --mint-foreground: 160 40% 25%;
     
     --peach: 25 100% 94%;
     --peach-foreground: 25 60% 35%;
     
-    --sky: 200 80% 94%;
+    --sky: 200 80% 92%;
     --sky-foreground: 200 60% 30%;
 
     /* Gradients */
-    --gradient-hero: linear-gradient(135deg, hsl(262 80% 50%) 0%, hsl(280 70% 55%) 50%, hsl(290 60% 60%) 100%);
-    --gradient-warm: linear-gradient(135deg, hsl(262 60% 94%) 0%, hsl(280 70% 55% / 0.1) 100%);
-    --gradient-calm: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(262 40% 96%) 100%);
-    --gradient-purple-subtle: linear-gradient(135deg, hsl(262 40% 96%) 0%, hsl(280 30% 98%) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(174 58% 32%) 0%, hsl(180 50% 45%) 50%, hsl(160 40% 50%) 100%);
+    --gradient-warm: linear-gradient(135deg, hsl(25 100% 94%) 0%, hsl(15 85% 60% / 0.2) 100%);
+    --gradient-calm: linear-gradient(180deg, hsl(40 33% 98%) 0%, hsl(200 80% 92% / 0.3) 100%);
 
     /* Shadows */
-    --shadow-sm: 0 1px 2px 0 hsl(240 10% 10% / 0.03);
-    --shadow-md: 0 4px 12px -2px hsl(240 10% 10% / 0.06);
-    --shadow-lg: 0 12px 24px -4px hsl(240 10% 10% / 0.08);
-    --shadow-xl: 0 24px 48px -8px hsl(240 10% 10% / 0.1);
-    --shadow-accent: 0 8px 24px 0 hsl(262 80% 50% / 0.25);
-    --shadow-primary: 0 8px 24px 0 hsl(262 80% 50% / 0.3);
+    --shadow-sm: 0 1px 2px 0 hsl(220 30% 15% / 0.05);
+    --shadow-md: 0 4px 6px -1px hsl(220 30% 15% / 0.07), 0 2px 4px -2px hsl(220 30% 15% / 0.05);
+    --shadow-lg: 0 10px 15px -3px hsl(220 30% 15% / 0.08), 0 4px 6px -4px hsl(220 30% 15% / 0.05);
+    --shadow-xl: 0 20px 25px -5px hsl(220 30% 15% / 0.1), 0 8px 10px -6px hsl(220 30% 15% / 0.05);
+    --shadow-accent: 0 4px 14px 0 hsl(15 85% 60% / 0.25);
+    --shadow-primary: 0 4px 14px 0 hsl(174 58% 32% / 0.25);
 
     /* Sidebar */
     --sidebar-background: 0 0% 100%;
-    --sidebar-foreground: 240 10% 10%;
-    --sidebar-primary: 262 80% 50%;
+    --sidebar-foreground: 220 30% 15%;
+    --sidebar-primary: 174 58% 32%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 262 40% 96%;
-    --sidebar-accent-foreground: 262 80% 40%;
-    --sidebar-border: 240 10% 90%;
-    --sidebar-ring: 262 80% 50%;
+    --sidebar-accent: 150 25% 92%;
+    --sidebar-accent-foreground: 174 58% 25%;
+    --sidebar-border: 40 20% 88%;
+    --sidebar-ring: 174 58% 32%;
   }
 
   .dark {
-    --background: 240 15% 8%;
-    --foreground: 0 0% 98%;
+    --background: 220 25% 10%;
+    --foreground: 40 20% 95%;
 
-    --card: 240 15% 11%;
-    --card-foreground: 0 0% 98%;
+    --card: 220 25% 13%;
+    --card-foreground: 40 20% 95%;
 
-    --popover: 240 15% 11%;
-    --popover-foreground: 0 0% 98%;
+    --popover: 220 25% 13%;
+    --popover-foreground: 40 20% 95%;
 
-    --primary: 262 70% 60%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 174 50% 45%;
+    --primary-foreground: 220 25% 10%;
 
-    --secondary: 262 30% 18%;
-    --secondary-foreground: 262 50% 75%;
+    --secondary: 174 30% 18%;
+    --secondary-foreground: 174 50% 70%;
 
-    --muted: 240 10% 18%;
-    --muted-foreground: 240 5% 60%;
+    --muted: 220 20% 18%;
+    --muted-foreground: 220 15% 60%;
 
-    --accent: 280 60% 60%;
+    --accent: 15 70% 55%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 62% 45%;
@@ -118,15 +117,15 @@
     --success: 160 50% 45%;
     --success-foreground: 0 0% 100%;
 
-    --border: 240 10% 20%;
-    --input: 240 10% 20%;
-    --ring: 262 70% 60%;
+    --border: 220 20% 20%;
+    --input: 220 20% 20%;
+    --ring: 174 50% 45%;
 
-    --lavender: 262 30% 20%;
-    --lavender-foreground: 262 40% 80%;
+    --lavender: 270 30% 20%;
+    --lavender-foreground: 270 40% 75%;
     
     --mint: 160 30% 18%;
-    --mint-foreground: 160 40% 75%;
+    --mint-foreground: 160 40% 70%;
     
     --peach: 25 40% 18%;
     --peach-foreground: 25 60% 75%;
@@ -134,14 +133,14 @@
     --sky: 200 40% 18%;
     --sky-foreground: 200 60% 75%;
 
-    --sidebar-background: 240 15% 10%;
-    --sidebar-foreground: 0 0% 98%;
-    --sidebar-primary: 262 70% 60%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 262 30% 18%;
-    --sidebar-accent-foreground: 262 50% 75%;
-    --sidebar-border: 240 10% 20%;
-    --sidebar-ring: 262 70% 60%;
+    --sidebar-background: 220 25% 12%;
+    --sidebar-foreground: 40 20% 95%;
+    --sidebar-primary: 174 50% 45%;
+    --sidebar-primary-foreground: 220 25% 10%;
+    --sidebar-accent: 174 30% 18%;
+    --sidebar-accent-foreground: 174 50% 70%;
+    --sidebar-border: 220 20% 20%;
+    --sidebar-ring: 174 50% 45%;
   }
 }
 
@@ -156,11 +155,11 @@
 
   body {
     @apply bg-background text-foreground antialiased;
-    font-family: 'Inter', system-ui, sans-serif;
+    font-family: 'Nunito', system-ui, sans-serif;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    font-family: 'Quicksand', system-ui, sans-serif;
     @apply font-bold tracking-tight;
   }
 }
@@ -171,7 +170,7 @@
   }
 
   .section-padding {
-    @apply py-20 md:py-28;
+    @apply py-16 md:py-24;
   }
 
   .text-gradient-primary {
@@ -195,7 +194,7 @@
   }
 
   .btn-shadow:hover {
-    box-shadow: var(--shadow-primary);
+    box-shadow: var(--shadow-lg);
   }
 
   .accent-shadow {
@@ -204,21 +203,6 @@
 
   .primary-shadow {
     box-shadow: var(--shadow-primary);
-  }
-
-  /* Zenklub-style rounded cards */
-  .zen-card {
-    @apply rounded-3xl bg-card border border-border/50;
-    box-shadow: var(--shadow-md);
-  }
-
-  .zen-card:hover {
-    box-shadow: var(--shadow-lg);
-  }
-
-  /* Pill badge */
-  .pill-badge {
-    @apply inline-flex items-center gap-2 rounded-full bg-secondary px-4 py-2 text-sm font-medium text-secondary-foreground;
   }
 }
 
@@ -284,19 +268,5 @@
       opacity: 1;
       transform: translateX(0);
     }
-  }
-
-  /* Logo marquee animation */
-  @keyframes marquee {
-    0% {
-      transform: translateX(0);
-    }
-    100% {
-      transform: translateX(-50%);
-    }
-  }
-
-  .animate-marquee {
-    animation: marquee 30s linear infinite;
   }
 }

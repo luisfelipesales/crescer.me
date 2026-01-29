@@ -1,44 +1,51 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetTrigger, SheetTitle, SheetDescription } from "@/components/ui/sheet";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
-import { Menu, Calendar, User, LogOut, ChevronDown } from "lucide-react";
+import { Menu, Heart, Phone, User, LogOut } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useAuth } from "@/hooks/useAuth";
-
-const navigation = [
-  { name: "Início", href: "/" },
-  { name: "Nossa abordagem", href: "/abordagem" },
-  { name: "Nossa equipe", href: "/equipe" },
-  { name: "Blog", href: "/blog" },
-  { name: "Trabalhe conosco", href: "/carreiras" },
-  { name: "Contato", href: "/contato" },
-];
-
+const navigation = [{
+  name: "Início",
+  href: "/"
+}, {
+  name: "Nossa abordagem",
+  href: "/abordagem"
+}, {
+  name: "Nossa equipe",
+  href: "/equipe"
+}, {
+  name: "Blog",
+  href: "/blog"
+}, {
+  name: "Trabalhe conosco",
+  href: "/carreiras"
+}, {
+  name: "Contato",
+  href: "/contato"
+}];
 export function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
-  const { user, signOut } = useAuth();
-
+  const {
+    user,
+    signOut
+  } = useAuth();
   const handleSignOut = async () => {
     await signOut();
     setIsOpen(false);
   };
-
-  return (
-    <header className="sticky top-0 z-50 w-full bg-background/80 backdrop-blur-lg border-b border-border/40">
+  return <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <nav className="container-custom flex h-16 items-center justify-between lg:h-20">
         {/* Logo */}
-        <Link to="/" className="flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-2xl">
-            🌱
+        <Link to="/" className="flex items-center gap-2">
+          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary">
+            <Heart className="h-5 w-5 text-primary-foreground" />
           </div>
           <div className="flex flex-col">
-            <span className="font-display text-xl font-bold text-foreground">
-              Crescer
-            </span>
-            <span className="hidden text-[10px] text-muted-foreground uppercase tracking-wider lg:block">
+            <span className="font-display text-lg font-bold text-foreground lg:text-xl">Crescer</span>
+            <span className="hidden text-xs text-muted-foreground sm:block">
               Saúde mental infantojuvenil
             </span>
           </div>
@@ -46,26 +53,14 @@ export function Header() {
 
         {/* Desktop Navigation */}
         <div className="hidden items-center gap-1 lg:flex">
-          {navigation.map((item) => (
-            <Link
-              key={item.name}
-              to={item.href}
-              className={cn(
-                "px-4 py-2 text-sm font-medium transition-colors rounded-lg",
-                location.pathname === item.href
-                  ? "text-primary"
-                  : "text-muted-foreground hover:text-foreground"
-              )}
-            >
+          {navigation.map(item => <Link key={item.name} to={item.href} className={cn("px-4 py-2 text-sm font-medium transition-colors rounded-lg", location.pathname === item.href ? "text-primary bg-secondary" : "text-muted-foreground hover:text-foreground hover:bg-muted")}>
               {item.name}
-            </Link>
-          ))}
+            </Link>)}
         </div>
 
         {/* Desktop CTA */}
         <div className="hidden items-center gap-3 lg:flex">
-          {user ? (
-            <>
+          {user ? <>
               <Link to="/dashboard">
                 <Button variant="ghost" size="sm">
                   <User className="mr-2 h-4 w-4" />
@@ -76,27 +71,19 @@ export function Header() {
                 <LogOut className="mr-2 h-4 w-4" />
                 Sair
               </Button>
-            </>
-          ) : (
-            <>
+            </> : <>
               <Link to="/entrar">
-                <Button variant="ghost" size="sm" className="text-muted-foreground">
-                  Criar conta
-                </Button>
-              </Link>
-              <Link to="/entrar">
-                <Button variant="outline" size="sm">
+                <Button variant="ghost" size="sm">
                   Entrar
                 </Button>
               </Link>
               <Link to="/agendar">
-                <Button size="sm" className="bg-primary hover:bg-primary/90 shadow-lg shadow-primary/25">
-                  <Calendar className="mr-2 h-4 w-4" />
-                  Agendar consulta
+                <Button size="sm" className="btn-shadow">
+                  <Phone className="mr-2 h-4 w-4" />
+                  Fazer triagem gratuita
                 </Button>
               </Link>
-            </>
-          )}
+            </>}
         </div>
 
         {/* Mobile Menu */}
@@ -112,34 +99,23 @@ export function Header() {
               <SheetTitle>Menu de navegação</SheetTitle>
             </VisuallyHidden>
             <div className="flex flex-col gap-6 pt-6">
-              <Link to="/" className="flex items-center gap-3" onClick={() => setIsOpen(false)}>
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-2xl">
-                  🌱
+              <Link to="/" className="flex items-center gap-2" onClick={() => setIsOpen(false)}>
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary">
+                  <Heart className="h-5 w-5 text-primary-foreground" />
                 </div>
-                <span className="font-display text-xl font-bold">Crescer</span>
+                <span className="font-display text-xl font-bold">
+                  Crescer
+                </span>
               </Link>
 
               <nav className="flex flex-col gap-1">
-                {navigation.map((item) => (
-                  <Link
-                    key={item.name}
-                    to={item.href}
-                    onClick={() => setIsOpen(false)}
-                    className={cn(
-                      "px-4 py-3 text-base font-medium transition-colors rounded-lg",
-                      location.pathname === item.href
-                        ? "text-primary bg-secondary"
-                        : "text-muted-foreground hover:text-foreground hover:bg-muted"
-                    )}
-                  >
+                {navigation.map(item => <Link key={item.name} to={item.href} onClick={() => setIsOpen(false)} className={cn("px-4 py-3 text-base font-medium transition-colors rounded-lg", location.pathname === item.href ? "text-primary bg-secondary" : "text-muted-foreground hover:text-foreground hover:bg-muted")}>
                     {item.name}
-                  </Link>
-                ))}
+                  </Link>)}
               </nav>
 
               <div className="flex flex-col gap-3 pt-4 border-t">
-                {user ? (
-                  <>
+                {user ? <>
                     <Link to="/dashboard" onClick={() => setIsOpen(false)}>
                       <Button variant="outline" className="w-full">
                         <User className="mr-2 h-4 w-4" />
@@ -150,9 +126,7 @@ export function Header() {
                       <LogOut className="mr-2 h-4 w-4" />
                       Sair
                     </Button>
-                  </>
-                ) : (
-                  <>
+                  </> : <>
                     <Link to="/entrar" onClick={() => setIsOpen(false)}>
                       <Button variant="outline" className="w-full">
                         Entrar
@@ -160,17 +134,15 @@ export function Header() {
                     </Link>
                     <Link to="/agendar" onClick={() => setIsOpen(false)}>
                       <Button className="w-full">
-                        <Calendar className="mr-2 h-4 w-4" />
-                        Agendar consulta
+                        <Phone className="mr-2 h-4 w-4" />
+                        Fazer triagem gratuita
                       </Button>
                     </Link>
-                  </>
-                )}
+                  </>}
               </div>
             </div>
           </SheetContent>
         </Sheet>
       </nav>
-    </header>
-  );
+    </header>;
 }

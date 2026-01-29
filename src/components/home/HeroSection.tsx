@@ -1,142 +1,115 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Calendar, CheckCircle } from "lucide-react";
-
-const trustBadges = [
-  "Triagem inicial gratuita",
-  "Psicólogos especializados",
-  "Atendimento online ou presencial",
-];
-
+import { ArrowRight, Phone, Play, Sparkles } from "lucide-react";
 export function HeroSection() {
-  return (
-    <section className="relative overflow-hidden bg-background">
+  return <section className="relative overflow-hidden bg-gradient-to-br from-secondary via-background to-sky/30">
+      {/* Background decorations */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute -top-40 -right-40 h-80 w-80 rounded-full bg-primary/5 blur-3xl" />
+        <div className="absolute -bottom-40 -left-40 h-80 w-80 rounded-full bg-accent/5 blur-3xl" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[600px] w-[600px] rounded-full bg-lavender/20 blur-3xl" />
+      </div>
+
       <div className="container-custom relative">
-        <div className="grid gap-12 py-16 md:py-20 lg:grid-cols-2 lg:gap-16 lg:py-28 items-center">
+        <div className="grid gap-12 py-16 md:py-24 lg:grid-cols-2 lg:gap-16 lg:py-32">
           {/* Content */}
           <div className="flex flex-col justify-center space-y-8">
-            {/* Badge */}
-            <div className="pill-badge self-start">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
-              </span>
-              <span>O melhor cuidado em saúde mental para seu filho</span>
+            <div className="inline-flex items-center gap-2 self-start rounded-full bg-accent/10 px-4 py-2 text-sm font-medium text-accent">
+              <Sparkles className="h-4 w-4" />
+              <span>Triagem inicial gratuita</span>
             </div>
 
-            {/* Headline */}
-            <div className="space-y-6">
-              <h1 className="font-display text-4xl font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl leading-[1.1]">
-                Saúde emocional{" "}
-                <span className="text-gradient-primary">é pra toda família</span>
+            <div className="space-y-4">
+              <h1 className="font-display text-4xl font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
+                Cuidando do{" "}
+                <span className="text-gradient-primary">futuro emocional</span>{" "}
+                do seu filho
               </h1>
               <p className="max-w-lg text-lg text-muted-foreground leading-relaxed">
-                Impulsionamos o desenvolvimento emocional de crianças e adolescentes. 
-                Do bem-estar ao pico do potencial, acelere a mudança que quer ver nos seus filhos.
+                Oferecemos terapia especializada para crianças e adolescentes, 
+                com uma abordagem acolhedora e baseada em evidências científicas 
+                que realmente funciona.
               </p>
             </div>
 
-            {/* CTA Buttons */}
             <div className="flex flex-col gap-4 sm:flex-row">
               <Link to="/agendar">
-                <Button 
-                  size="lg" 
-                  className="w-full sm:w-auto h-14 px-8 text-base shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-all"
-                >
-                  <Calendar className="mr-2 h-5 w-5" />
-                  Agendar consulta
-                </Button>
-              </Link>
-              <Link to="/abordagem">
-                <Button 
-                  variant="outline" 
-                  size="lg" 
-                  className="w-full sm:w-auto h-14 px-8 text-base group"
-                >
-                  Como funciona
+                <Button size="lg" className="w-full sm:w-auto btn-shadow group">
+                  <Phone className="mr-2 h-5 w-5" />
+                  Fazer triagem inicial gratuita
                   <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </Button>
               </Link>
+              <Link to="/abordagem">
+                <Button variant="outline" size="lg" className="w-full sm:w-auto group">
+                  <Play className="mr-2 h-5 w-5" />
+                  Como funciona
+                </Button>
+              </Link>
             </div>
 
-            {/* Trust badges */}
-            <div className="flex flex-col gap-3 pt-4">
-              {trustBadges.map((badge, index) => (
-                <div key={index} className="flex items-center gap-3 text-muted-foreground">
-                  <CheckCircle className="h-5 w-5 text-primary" />
-                  <span className="text-sm">{badge}</span>
+            {/* Trust indicators */}
+            <div className="flex flex-wrap items-center gap-6 pt-4">
+              <div className="flex items-center gap-2">
+                <div className="flex -space-x-2">
+                  {[1, 2, 3, 4].map(i => <div key={i} className="h-8 w-8 rounded-full border-2 border-background bg-gradient-to-br from-primary to-primary/70" />)}
                 </div>
-              ))}
+                <span className="text-sm text-muted-foreground">
+                  <strong className="text-foreground">+500</strong> famílias atendidas
+                </span>
+              </div>
+              
             </div>
           </div>
 
-          {/* Image/Visual */}
+          {/* Image/Illustration */}
           <div className="relative flex items-center justify-center lg:justify-end">
-            <div className="relative w-full max-w-[500px]">
-              {/* Main image container - Zenklub style with rounded corners */}
-              <div className="relative aspect-[4/3] overflow-hidden rounded-3xl bg-gradient-to-br from-secondary to-lavender">
-                {/* Placeholder for hero image - shows happy family/children */}
-                <div className="absolute inset-0 flex items-center justify-center">
+            <div className="relative">
+              {/* Main illustration container */}
+              <div className="relative h-[400px] w-[400px] sm:h-[450px] sm:w-[450px] lg:h-[500px] lg:w-[500px]">
+                {/* Decorative circles */}
+                <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary/20 to-accent/20 animate-float" />
+                <div className="absolute inset-4 rounded-full bg-gradient-to-tr from-mint to-lavender animate-float-delayed" />
+                <div className="absolute inset-8 rounded-full bg-card shadow-xl flex items-center justify-center">
                   <div className="text-center p-8">
-                    <div className="text-8xl mb-6">👨‍👩‍👧‍👦</div>
+                    <div className="text-6xl mb-4">🌱</div>
                     <p className="font-display text-xl font-semibold text-foreground">
-                      Famílias mais felizes
+                      Cada criança merece florescer
                     </p>
                     <p className="text-muted-foreground mt-2">
-                      +500 famílias atendidas
+                      Terapia que transforma
                     </p>
                   </div>
                 </div>
               </div>
 
-              {/* Floating notification card - top right */}
-              <div className="absolute -top-4 -right-4 md:top-4 md:right-[-60px] bg-card rounded-2xl p-4 shadow-xl border border-border/50 animate-float">
+              {/* Floating cards */}
+              <div className="absolute -left-4 top-20 rounded-2xl bg-card p-4 shadow-lg animate-float">
                 <div className="flex items-center gap-3">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-mint text-xl">
-                    📅
-                  </div>
-                  <div>
-                    <p className="text-xs text-muted-foreground">Sua sessão é hoje!</p>
-                    <p className="font-semibold text-foreground text-sm">14h às 15h</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Floating stats card - bottom left */}
-              <div className="absolute -bottom-4 -left-4 md:bottom-8 md:left-[-40px] bg-card rounded-2xl p-4 shadow-xl border border-border/50 animate-float-delayed">
-                <div className="flex items-center gap-3">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-lavender text-xl">
-                    📊
+                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-mint">
+                    <span className="text-2xl">😊</span>
                   </div>
                   <div>
                     <p className="font-semibold text-foreground">94%</p>
-                    <p className="text-xs text-muted-foreground">Melhora relatada</p>
+                    <p className="text-sm text-muted-foreground">Melhora relatada</p>
                   </div>
                 </div>
               </div>
 
-              {/* QR Code style decoration - bottom right */}
-              <div className="absolute bottom-4 right-4 bg-card rounded-xl p-3 shadow-lg border border-border/50 hidden md:block">
-                <div className="grid grid-cols-4 gap-1 w-16 h-16">
-                  {[...Array(16)].map((_, i) => (
-                    <div 
-                      key={i} 
-                      className={`rounded-sm ${Math.random() > 0.5 ? 'bg-foreground' : 'bg-transparent'}`}
-                    />
-                  ))}
+              <div className="absolute -right-4 bottom-20 rounded-2xl bg-card p-4 shadow-lg animate-float-delayed">
+                <div className="flex items-center gap-3">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-peach">
+                    <span className="text-2xl">🎯</span>
+                  </div>
+                  <div>
+                    <p className="font-semibold text-foreground">8 sessões</p>
+                    <p className="text-sm text-muted-foreground">Resultados visíveis</p>
+                  </div>
                 </div>
-                <p className="text-[8px] text-center text-muted-foreground mt-1">Baixe o app</p>
               </div>
             </div>
           </div>
         </div>
       </div>
-
-      {/* Subtle background gradient */}
-      <div className="absolute inset-0 -z-10 overflow-hidden">
-        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/5 rounded-full blur-3xl translate-x-1/2 -translate-y-1/2" />
-        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-accent/5 rounded-full blur-3xl -translate-x-1/2 translate-y-1/2" />
-      </div>
-    </section>
-  );
+    </section>;
 }

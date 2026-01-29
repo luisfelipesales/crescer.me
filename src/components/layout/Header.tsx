@@ -18,12 +18,6 @@ const navigation = [{
 }, {
   name: "Blog",
   href: "/blog"
-}, {
-  name: "Trabalhe conosco",
-  href: "/carreiras"
-}, {
-  name: "Contato",
-  href: "/contato"
 }];
 export function Header() {
   const [isOpen, setIsOpen] = useState(false);

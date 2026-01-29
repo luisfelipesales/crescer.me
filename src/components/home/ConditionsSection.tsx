@@ -49,10 +49,11 @@ export function ConditionsSection() {
   const duplicatedConditions = [...conditions, ...conditions];
 
   return (
-    <section className="section-padding bg-gradient-to-b from-background to-secondary/30">
+    <section className="py-20 bg-secondary/30">
       <div className="container-custom mb-12">
         <div className="text-center">
-          <h2 className="font-display text-3xl font-bold text-foreground sm:text-4xl">
+          <div className="pill-badge mx-auto mb-4">Especialidades</div>
+          <h2 className="font-display text-3xl font-bold text-foreground sm:text-4xl lg:text-5xl">
             Condições que tratamos
           </h2>
           <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
@@ -72,7 +73,7 @@ export function ConditionsSection() {
           {duplicatedConditions.map((condition, index) => (
             <div
               key={`${condition.name}-${index}`}
-              className="group inline-flex items-center gap-3 rounded-2xl bg-card px-6 py-4 shadow-sm transition-all hover:shadow-md hover:-translate-y-1 cursor-pointer"
+              className="group inline-flex items-center gap-3 rounded-2xl bg-card border border-border/50 px-6 py-4 transition-all hover:shadow-lg hover:-translate-y-1 cursor-pointer"
             >
               <span className="text-2xl">{condition.emoji}</span>
               <span className="font-medium text-foreground whitespace-nowrap">
@@ -83,7 +84,7 @@ export function ConditionsSection() {
         </div>
       </div>
 
-      <div className="container-custom mt-8 text-center">
+      <div className="container-custom mt-10 text-center">
         <p className="text-muted-foreground">
           Não encontrou o que procura?{" "}
           <a href="/contato" className="text-primary hover:underline font-medium">

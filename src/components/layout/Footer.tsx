@@ -47,12 +47,7 @@ export function Footer() {
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
           {/* Brand and Contact */}
           <div className="space-y-8">
-            <div className="flex items-center gap-2">
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary">
-                <Heart className="h-6 w-6 text-primary-foreground" />
-              </div>
-              <span className="font-display text-2xl font-bold">Crescer</span>
-            </div>
+            
 
             <div className="flex items-center gap-6 mt-6">
               <a href="mailto:contato@crescer.me" className="flex items-center gap-2 text-background/80 hover:text-accent transition-colors">

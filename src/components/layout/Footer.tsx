@@ -51,35 +51,17 @@ export function Footer() {
               <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary">
                 <Heart className="h-6 w-6 text-primary-foreground" />
               </div>
-              <div>
-                <span className="font-display text-2xl font-bold">Crescer</span>
-                <p className="text-sm text-background/70">
-                  Saúde mental infantojuvenil
-                </p>
-              </div>
+              <span className="font-display text-2xl font-bold">Crescer</span>
             </div>
 
-            <p className="max-w-md text-background/80 leading-relaxed">
-              Cuidamos da saúde mental de crianças, adolescentes e suas famílias 
-              com uma abordagem acolhedora, baseada em evidências científicas e 
-              focada em resultados que transformam vidas.
-            </p>
-
-            <div className="space-y-3">
-              
-              <a href="mailto:contato@crescer.me" className="flex items-center gap-3 text-background/80 hover:text-accent transition-colors">
+            <div className="flex items-center gap-6 mt-6">
+              <a href="mailto:contato@crescer.me" className="flex items-center gap-2 text-background/80 hover:text-accent transition-colors">
                 <Mail className="h-5 w-5" />
                 <span>contato@crescer.me</span>
               </a>
-              <div className="flex items-start gap-3 text-background/80">
-                
-                
-              </div>
-            </div>
-
-            <div className="flex gap-4">
-              <a href="https://instagram.com/crescer.me" target="_blank" rel="noopener noreferrer" className="flex h-10 w-10 items-center justify-center rounded-full bg-background/10 hover:bg-accent hover:text-accent-foreground transition-colors">
+              <a href="https://instagram.com/crescer.me" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-background/80 hover:text-accent transition-colors">
                 <Instagram className="h-5 w-5" />
+                <span>@crescer.me</span>
               </a>
             </div>
           </div>

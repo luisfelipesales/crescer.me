@@ -81,6 +81,154 @@ export type Database = {
           },
         ]
       }
+      assessment_automation: {
+        Row: {
+          created_at: string | null
+          frequency_days: number
+          id: string
+          is_active: boolean | null
+          template_id: string
+          treatment_phase: Database["public"]["Enums"]["treatment_phase"]
+        }
+        Insert: {
+          created_at?: string | null
+          frequency_days?: number
+          id?: string
+          is_active?: boolean | null
+          template_id: string
+          treatment_phase: Database["public"]["Enums"]["treatment_phase"]
+        }
+        Update: {
+          created_at?: string | null
+          frequency_days?: number
+          id?: string
+          is_active?: boolean | null
+          template_id?: string
+          treatment_phase?: Database["public"]["Enums"]["treatment_phase"]
+        }
+        Relationships: [
+          {
+            foreignKeyName: "assessment_automation_template_id_fkey"
+            columns: ["template_id"]
+            isOneToOne: false
+            referencedRelation: "assessment_templates"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      assessment_questions: {
+        Row: {
+          created_at: string | null
+          id: string
+          options: Json
+          question_number: number
+          question_text: string
+          template_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          options: Json
+          question_number: number
+          question_text: string
+          template_id: string
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          options?: Json
+          question_number?: number
+          question_text?: string
+          template_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "assessment_questions_template_id_fkey"
+            columns: ["template_id"]
+            isOneToOne: false
+            referencedRelation: "assessment_templates"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      assessment_responses: {
+        Row: {
+          assessment_id: string
+          created_at: string | null
+          id: string
+          question_id: string
+          response_value: number
+        }
+        Insert: {
+          assessment_id: string
+          created_at?: string | null
+          id?: string
+          question_id: string
+          response_value: number
+        }
+        Update: {
+          assessment_id?: string
+          created_at?: string | null
+          id?: string
+          question_id?: string
+          response_value?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "assessment_responses_assessment_id_fkey"
+            columns: ["assessment_id"]
+            isOneToOne: false
+            referencedRelation: "patient_assessments"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "assessment_responses_question_id_fkey"
+            columns: ["question_id"]
+            isOneToOne: false
+            referencedRelation: "assessment_questions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      assessment_templates: {
+        Row: {
+          code: string
+          created_at: string | null
+          description: string | null
+          id: string
+          is_active: boolean | null
+          max_score: number
+          min_score: number | null
+          name: string
+          scoring_ranges: Json | null
+          target_audience: string | null
+        }
+        Insert: {
+          code: string
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          is_active?: boolean | null
+          max_score: number
+          min_score?: number | null
+          name: string
+          scoring_ranges?: Json | null
+          target_audience?: string | null
+        }
+        Update: {
+          code?: string
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          is_active?: boolean | null
+          max_score?: number
+          min_score?: number | null
+          name?: string
+          scoring_ranges?: Json | null
+          target_audience?: string | null
+        }
+        Relationships: []
+      }
       insurance_plans: {
         Row: {
           created_at: string
@@ -255,6 +403,83 @@ export type Database = {
             columns: ["parent_id"]
             isOneToOne: false
             referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      patient_assessments: {
+        Row: {
+          completed_at: string | null
+          created_at: string | null
+          expires_at: string | null
+          id: string
+          notes: string | null
+          patient_id: string
+          sent_at: string | null
+          severity_level: string | null
+          status: string
+          template_id: string
+          therapist_id: string
+          total_score: number | null
+          treatment_id: string | null
+        }
+        Insert: {
+          completed_at?: string | null
+          created_at?: string | null
+          expires_at?: string | null
+          id?: string
+          notes?: string | null
+          patient_id: string
+          sent_at?: string | null
+          severity_level?: string | null
+          status?: string
+          template_id: string
+          therapist_id: string
+          total_score?: number | null
+          treatment_id?: string | null
+        }
+        Update: {
+          completed_at?: string | null
+          created_at?: string | null
+          expires_at?: string | null
+          id?: string
+          notes?: string | null
+          patient_id?: string
+          sent_at?: string | null
+          severity_level?: string | null
+          status?: string
+          template_id?: string
+          therapist_id?: string
+          total_score?: number | null
+          treatment_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "patient_assessments_patient_id_fkey"
+            columns: ["patient_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "patient_assessments_template_id_fkey"
+            columns: ["template_id"]
+            isOneToOne: false
+            referencedRelation: "assessment_templates"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "patient_assessments_therapist_id_fkey"
+            columns: ["therapist_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "patient_assessments_treatment_id_fkey"
+            columns: ["treatment_id"]
+            isOneToOne: false
+            referencedRelation: "patient_treatments"
             referencedColumns: ["id"]
           },
         ]

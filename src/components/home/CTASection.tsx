@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Phone, Calendar, ArrowRight, CheckCircle, Mail } from "lucide-react";
+import { Calendar, ArrowRight, CheckCircle, Mail } from "lucide-react";
 
 const benefits = [
   "Triagem inicial gratuita de 30 minutos",
@@ -64,7 +64,7 @@ export function CTASection() {
                 <div className="space-y-4">
                   <Link to="/agendar" className="block">
                     <Button size="lg" className="w-full btn-shadow group">
-                      <Phone className="mr-2 h-5 w-5" />
+                      <Calendar className="mr-2 h-5 w-5" />
                       Fazer triagem inicial gratuita
                       <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                     </Button>

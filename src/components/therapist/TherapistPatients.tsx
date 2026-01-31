@@ -3,13 +3,14 @@ import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Loader2, User, Calendar, MoreHorizontal, History, ArrowRightLeft } from "lucide-react";
+import { Loader2, User, Calendar, MoreHorizontal, History, ArrowRightLeft, ClipboardList } from "lucide-react";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import type { Tables } from "@/integrations/supabase/types";
 import { TreatmentPhaseBadge, TreatmentPhase } from "./TreatmentPhaseBadge";
 import { PhaseTransitionDialog } from "./PhaseTransitionDialog";
 import { PhaseHistorySheet } from "./PhaseHistorySheet";
+import { PatientDetailsSheet } from "./PatientDetailsSheet";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -40,6 +41,7 @@ export function TherapistPatients({ therapistId }: TherapistPatientsProps) {
   const [selectedPatient, setSelectedPatient] = useState<PatientInfo | null>(null);
   const [phaseDialogOpen, setPhaseDialogOpen] = useState(false);
   const [historySheetOpen, setHistorySheetOpen] = useState(false);
+  const [detailsSheetOpen, setDetailsSheetOpen] = useState(false);
 
   useEffect(() => {
     if (therapistId) {
@@ -165,6 +167,11 @@ export function TherapistPatients({ therapistId }: TherapistPatientsProps) {
     setHistorySheetOpen(true);
   };
 
+  const openDetailsSheet = (patient: PatientInfo) => {
+    setSelectedPatient(patient);
+    setDetailsSheetOpen(true);
+  };
+
   if (loading) {
     return (
       <div className="flex items-center justify-center py-12">
@@ -225,6 +232,10 @@ export function TherapistPatients({ therapistId }: TherapistPatientsProps) {
                     </Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end">
+                    <DropdownMenuItem onClick={() => openDetailsSheet(patient)}>
+                      <ClipboardList className="mr-2 h-4 w-4" />
+                      Assessments
+                    </DropdownMenuItem>
                     <DropdownMenuItem onClick={() => openPhaseDialog(patient)}>
                       <ArrowRightLeft className="mr-2 h-4 w-4" />
                       Alterar Fase
@@ -302,6 +313,22 @@ export function TherapistPatients({ therapistId }: TherapistPatientsProps) {
           onOpenChange={setHistorySheetOpen}
           treatmentId={selectedPatient.treatment.id}
           patientName={selectedPatient.profile.full_name}
+        />
+      )}
+
+      {/* Patient Details Sheet */}
+      {selectedPatient && (
+        <PatientDetailsSheet
+          open={detailsSheetOpen}
+          onOpenChange={setDetailsSheetOpen}
+          patient={{
+            id: selectedPatient.profile.id,
+            name: selectedPatient.profile.full_name,
+            treatmentId: selectedPatient.treatment?.id,
+            currentPhase: selectedPatient.treatment?.current_phase,
+          }}
+          therapistId={therapistId}
+          onRefresh={handlePhaseChange}
         />
       )}
     </>

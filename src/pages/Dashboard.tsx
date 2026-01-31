@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { PostSessionOfferDialog } from "@/components/patient/PostSessionOfferDialog";
 import { ScheduleNextSessionCard } from "@/components/patient/ScheduleNextSessionCard";
+import { PatientAssessments } from "@/components/assessment/PatientAssessments";
 import { supabase } from "@/integrations/supabase/client";
 import { format, isFuture, differenceInDays } from "date-fns";
 import { ptBR } from "date-fns/locale";
@@ -236,6 +237,13 @@ export default function Dashboard() {
                 hasActivePackage={!!activePackage}
                 remainingSessions={activePackage?.remaining || 0}
               />
+            </div>
+          )}
+
+          {/* Questionários Pendentes */}
+          {profile && (
+            <div className="mb-8">
+              <PatientAssessments patientId={profile.id} />
             </div>
           )}
 

@@ -352,6 +352,63 @@ export type Database = {
           },
         ]
       }
+      patient_treatments: {
+        Row: {
+          created_at: string
+          current_phase: Database["public"]["Enums"]["treatment_phase"]
+          discharged_at: string | null
+          id: string
+          next_assessment_due: string | null
+          notes: string | null
+          patient_id: string
+          phase_started_at: string
+          therapist_id: string
+          treatment_started_at: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          current_phase?: Database["public"]["Enums"]["treatment_phase"]
+          discharged_at?: string | null
+          id?: string
+          next_assessment_due?: string | null
+          notes?: string | null
+          patient_id: string
+          phase_started_at?: string
+          therapist_id: string
+          treatment_started_at?: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          current_phase?: Database["public"]["Enums"]["treatment_phase"]
+          discharged_at?: string | null
+          id?: string
+          next_assessment_due?: string | null
+          notes?: string | null
+          patient_id?: string
+          phase_started_at?: string
+          therapist_id?: string
+          treatment_started_at?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "patient_treatments_patient_id_fkey"
+            columns: ["patient_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "patient_treatments_therapist_id_fkey"
+            columns: ["therapist_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       post_session_offers: {
         Row: {
           appointment_id: string
@@ -731,6 +788,54 @@ export type Database = {
           },
         ]
       }
+      treatment_phase_history: {
+        Row: {
+          changed_by: string
+          created_at: string
+          from_phase: Database["public"]["Enums"]["treatment_phase"] | null
+          id: string
+          notes: string | null
+          reason: string | null
+          to_phase: Database["public"]["Enums"]["treatment_phase"]
+          treatment_id: string
+        }
+        Insert: {
+          changed_by: string
+          created_at?: string
+          from_phase?: Database["public"]["Enums"]["treatment_phase"] | null
+          id?: string
+          notes?: string | null
+          reason?: string | null
+          to_phase: Database["public"]["Enums"]["treatment_phase"]
+          treatment_id: string
+        }
+        Update: {
+          changed_by?: string
+          created_at?: string
+          from_phase?: Database["public"]["Enums"]["treatment_phase"] | null
+          id?: string
+          notes?: string | null
+          reason?: string | null
+          to_phase?: Database["public"]["Enums"]["treatment_phase"]
+          treatment_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "treatment_phase_history_changed_by_fkey"
+            columns: ["changed_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "treatment_phase_history_treatment_id_fkey"
+            columns: ["treatment_id"]
+            isOneToOne: false
+            referencedRelation: "patient_treatments"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       user_roles: {
         Row: {
           created_at: string
@@ -774,6 +879,12 @@ export type Database = {
       app_role: "admin" | "therapist" | "user"
       appointment_status: "pending" | "confirmed" | "cancelled" | "completed"
       profile_type: "patient" | "therapist" | "parent"
+      treatment_phase:
+        | "triagem"
+        | "avaliacao"
+        | "tratamento_ativo"
+        | "manutencao"
+        | "alta"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -904,6 +1015,13 @@ export const Constants = {
       app_role: ["admin", "therapist", "user"],
       appointment_status: ["pending", "confirmed", "cancelled", "completed"],
       profile_type: ["patient", "therapist", "parent"],
+      treatment_phase: [
+        "triagem",
+        "avaliacao",
+        "tratamento_ativo",
+        "manutencao",
+        "alta",
+      ],
     },
   },
 } as const

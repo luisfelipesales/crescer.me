@@ -22,6 +22,7 @@ import {
   XCircle,
   ArrowLeft,
   Download,
+  BarChart3,
 } from "lucide-react";
 import type { Tables } from "@/integrations/supabase/types";
 import { TherapistSettings } from "@/components/therapist/TherapistSettings";
@@ -29,6 +30,7 @@ import { TherapistPatients } from "@/components/therapist/TherapistPatients";
 import { TherapistAppointments } from "@/components/therapist/TherapistAppointments";
 import { TherapistPayouts } from "@/components/therapist/TherapistPayouts";
 import { TherapistBenefitsCarousel } from "@/components/therapist/TherapistBenefitsCarousel";
+import { TherapistMetrics } from "@/components/therapist/TherapistMetrics";
 import { toast } from "sonner";
 
 export default function TherapistPortal() {
@@ -237,7 +239,7 @@ export default function TherapistPortal() {
 
           {/* Tabs */}
           <Tabs value={activeTab} onValueChange={setActiveTab}>
-            <TabsList className="mb-6 grid w-full grid-cols-4 lg:w-auto lg:inline-flex">
+            <TabsList className="mb-6 grid w-full grid-cols-5 lg:w-auto lg:inline-flex">
               <TabsTrigger value="appointments" className="gap-2">
                 <Calendar className="h-4 w-4" />
                 <span className="hidden sm:inline">Agenda</span>
@@ -245,6 +247,10 @@ export default function TherapistPortal() {
               <TabsTrigger value="patients" className="gap-2">
                 <Users className="h-4 w-4" />
                 <span className="hidden sm:inline">Pacientes</span>
+              </TabsTrigger>
+              <TabsTrigger value="metrics" className="gap-2">
+                <BarChart3 className="h-4 w-4" />
+                <span className="hidden sm:inline">Métricas</span>
               </TabsTrigger>
               <TabsTrigger value="payouts" className="gap-2">
                 <DollarSign className="h-4 w-4" />
@@ -262,6 +268,10 @@ export default function TherapistPortal() {
 
             <TabsContent value="patients">
               <TherapistPatients therapistId={profile?.id || ""} />
+            </TabsContent>
+
+            <TabsContent value="metrics">
+              <TherapistMetrics therapistId={profile?.id || ""} />
             </TabsContent>
 
             <TabsContent value="payouts">

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Phone, Play, Sparkles } from "lucide-react";
+import { ArrowRight, Calendar, Play, Sparkles } from "lucide-react";
 export function HeroSection() {
   return <section className="relative overflow-hidden bg-gradient-to-br from-secondary via-background to-sky/30">
       {/* Background decorations */}
@@ -35,7 +35,7 @@ export function HeroSection() {
             <div className="flex flex-col gap-4 sm:flex-row">
               <Link to="/agendar">
                 <Button size="lg" className="w-full sm:w-auto btn-shadow group">
-                  <Phone className="mr-2 h-5 w-5" />
+                  <Calendar className="mr-2 h-5 w-5" />
                   Fazer triagem inicial gratuita
                   <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </Button>
